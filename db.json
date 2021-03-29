@@ -7,9 +7,10 @@
             "background": "https://i.imgur.com/rxKbd9D.jpg",
             "favicon": "",
             "credits": {
+                "phone": "+79852003740",
                 "telegram": "https://tg.me/stark_n1"
             },
-            "posts": [0],
+            "posts": [0, 1, 2, 3, 4, 5, 6],
             "constructor": {
                 "contactButton": {
                     "name": "Связаться"
@@ -22,12 +23,52 @@
             "id": 0,
             "img": "https://i.imgur.com/rKEclQb.jpg",
             "url": "",
-            "title": "Кофе \"Еспрессо\"",
+            "title": "Кофе \"Эспрессо\"",
             "description": "Хорошее кофе",
             "price": 155
         },
         {
             "id": 1,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        },
+        {
+            "id": 2,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        },
+        {
+            "id": 3,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        },
+        {
+            "id": 4,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        },
+        {
+            "id": 5,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        },
+        {
+            "id": 6,
             "img": "",
             "url": "",
             "title": "M9 Bayonet | Дамасская сталь",

@@ -1,13 +1,11 @@
 import NotFound from 'pages/404';
 import SiteLayout from 'components/SiteLayout';
-import Fetch from 'classes/fetch';
+import Fetch from 'classes/Fetch';
 
 export default function Site(props) {
     if (!Object.keys(props).length) {
         return <NotFound/>;
     }
-
-    console.log(props.posts)
 
     return (
         <SiteLayout
@@ -17,7 +15,13 @@ export default function Site(props) {
     );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, req }) {
+    if (!req) {
+        return {
+            props:{}
+        };
+    }
+
     const url = `/api/v1/websites/${query.id}`;
     const details = new Fetch(`${url}/details`);
     const posts = new Fetch(`${url}/posts`);

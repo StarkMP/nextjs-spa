@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import DefaultLink from 'components/DefaultLink';
 import colors from 'styles/utils/colors.module.scss';
 import styles from 'styles/components/SiteLayout.module.scss';
-import Posts from './Posts';
+import Carousel from 'components/Carousel';
 
 export default function SiteLayout(props) {
     const [scrolled, setScrolled] = useState(false);
@@ -15,6 +15,14 @@ export default function SiteLayout(props) {
         description
     } = props.details;
 
+    const mappedPosts = props.posts.map(post => {
+        return (
+            <div key={post.id}>
+                {post.title}
+            </div>
+        );
+    });
+
     const onScroll = () => {
         if (pageYOffset > 0) {
             setScrolled(true);
@@ -24,10 +32,12 @@ export default function SiteLayout(props) {
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', onScroll);
+        const $document = $(document);
+
+        $document.on('scroll', onScroll);
 
         return () => {
-            window.removeEventListener('scroll', onScroll);
+            $document.off('scroll', onScroll);
         };
     }, []);
 
@@ -35,6 +45,8 @@ export default function SiteLayout(props) {
         <>
             <Head>
                 <title>{title}</title>
+                <meta charSet="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
             </Head>
 
             <header className={`header fixed-top px-4 ${styles.header} ${scrolled ? 'bg-light' : ''}`}>
@@ -52,7 +64,12 @@ export default function SiteLayout(props) {
                 <div className={`container`}>
                     <section className={`${styles.section}`}>
                         <h2>Товары и услуги</h2>
-                        <Posts goods={props.posts}/>
+                        <Carousel
+                            items={mappedPosts}
+                            divide={6}
+                            id='posts'
+                            className={styles.carousel}
+                        />
                     </section>
                 </div>
             </main>
