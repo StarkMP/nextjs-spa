@@ -1,0 +1,38 @@
+{
+    "websites": [
+        {
+            "id": "coffehouse",
+            "title": "Кофе-хаус",
+            "description": "Уютная кофейня в самом центре Санкт-Петербурга. Здесь Вы сможете насладиться ароматным, вкусным кофе из авторских зерновых подборок.",
+            "background": "https://i.imgur.com/rxKbd9D.jpg",
+            "favicon": "",
+            "credits": {
+                "telegram": "https://tg.me/stark_n1"
+            },
+            "posts": [0],
+            "constructor": {
+                "contactButton": {
+                    "name": "Связаться"
+                }
+            }
+        }
+    ],
+    "posts": [
+        {
+            "id": 0,
+            "img": "https://i.imgur.com/rKEclQb.jpg",
+            "url": "",
+            "title": "Кофе \"Еспрессо\"",
+            "description": "Хорошее кофе",
+            "price": 155
+        },
+        {
+            "id": 1,
+            "img": "",
+            "url": "",
+            "title": "M9 Bayonet | Дамасская сталь",
+            "description": "Плохой нож",
+            "price": 14
+        }
+    ]
+}
