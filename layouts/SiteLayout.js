@@ -19,7 +19,9 @@ export default function SiteLayout(props) {
     const mappedPosts = props.posts.map(post => {
         return (
             <div className='site__post' key={post.id}>
-                <div className='site__post-inner' style={{ backgroundImage: `url(${post.img})` }}></div>
+                <div className='site__post-inner' style={{ backgroundImage: `url(${post.img})` }}>
+                    <div className='site__post-info'>{post.title}</div>
+                </div>
             </div>
         );
     });
@@ -76,6 +78,19 @@ export default function SiteLayout(props) {
         };
     }, []);
 
+    const postsSection = props.posts.length ? (
+        <section id='posts' className='site__section'>
+            <h2 className='site__section-title'>Товары и услуги</h2>
+            <Carousel
+                items={mappedPosts}
+                divide={divide}
+                id='posts-carousel'
+                theme='dark'
+                reference={postsRef}
+            />
+        </section>
+    ) : null;
+
     return (
         <>
             <Head>
@@ -97,20 +112,7 @@ export default function SiteLayout(props) {
                     </div>
                 </section>
                 <div className={`container`}>
-                    <section id='posts' className='site__section'>
-                        <h2 className='site__section-title'>Товары и услуги</h2>
-                        {props.posts.length ? (
-                            <Carousel
-                                items={mappedPosts}
-                                divide={divide}
-                                id='posts-carousel'
-                                theme='dark'
-                                reference={postsRef}
-                            />
-                        ) : (
-                            <h5 className='site__section-empty'>Список товаров пуст</h5>
-                        )}
-                    </section>
+                    {postsSection}
                 </div>
             </main>
 
