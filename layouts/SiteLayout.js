@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-import colors from 'styles/utils/colors.module.scss';
 import Carousel from 'components/Carousel';
 
 export default function SiteLayout(props) {
@@ -73,9 +72,9 @@ export default function SiteLayout(props) {
                 </div>
             </main>
 
-            <footer className='footer mt-auto py-2 bg-dark'>
+            <footer className='footer mt-auto py-2 bg-dark site-footer'>
                 <div className='container text-white'>
-                    Сделано в <Link href='/'><a className={`text-decoration-none ${colors.link}`}>Boxis.io</a></Link>
+                    Сделано в <Link href='/'><a className={`text-decoration-none site-footer__link`}>Boxis.io</a></Link>
                 </div>
             </footer>
         </>

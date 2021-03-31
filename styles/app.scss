@@ -1,8 +1,12 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
 #__next {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #f8f9fa;
+    background: $gray-100;
     overflow-x: hidden;
 }
 
