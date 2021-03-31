@@ -1,17 +1,20 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import Carousel from 'components/Carousel';
 
 export default function SiteLayout(props) {
     const [scrolled, setScrolled] = useState(false);
+    const [divide, setDivide] = useState(8);
 
     const {
         title,
         background,
         description
     } = props.details;
+
+    const postsRef = useRef(null);
 
     const mappedPosts = props.posts.map(post => {
         return (
@@ -29,13 +32,47 @@ export default function SiteLayout(props) {
         }
     };
 
+    // todo костыль
+    const setupPostsCarouselSize = () => {
+        if (!props.posts.length) {
+            return;
+        }
+
+        const $carousel = $(postsRef.current);
+        const scrW = $(window).width();
+
+        let carouselWidth = 0;
+
+        if (scrW <= 768-17) {
+            carouselWidth = $carousel.width() / 3;
+            setDivide(3);
+        } else {
+            carouselWidth = $carousel.width() / 2;
+            setDivide(8);
+
+            if (props.posts.length < 5) {
+                carouselWidth /= 2;
+                $(postsRef.current).find('.site__post').css({ height: '100%' });
+            }
+        }
+
+        if ($carousel.height() !== carouselWidth) {
+            $carousel.height(carouselWidth);
+        }
+    };
+
     useEffect(() => {
         const $document = $(document);
+        const $window = $(window);
 
         $document.on('scroll', onScroll);
+        $window.on('resize', setupPostsCarouselSize);
+
+        setupPostsCarouselSize();
 
         return () => {
             $document.off('scroll', onScroll);
+            $window.off('resize', setupPostsCarouselSize);
         };
     }, []);
 
@@ -60,14 +97,19 @@ export default function SiteLayout(props) {
                     </div>
                 </section>
                 <div className={`container`}>
-                    <section className='site__section'>
+                    <section id='posts' className='site__section'>
                         <h2 className='site__section-title'>Товары и услуги</h2>
-                        <Carousel
-                            items={mappedPosts}
-                            divide={8}
-                            id='posts'
-                            theme='dark'
-                        />
+                        {props.posts.length ? (
+                            <Carousel
+                                items={mappedPosts}
+                                divide={divide}
+                                id='posts-carousel'
+                                theme='dark'
+                                reference={postsRef}
+                            />
+                        ) : (
+                            <h5 className='site__section-empty'>Список товаров пуст</h5>
+                        )}
                     </section>
                 </div>
             </main>
