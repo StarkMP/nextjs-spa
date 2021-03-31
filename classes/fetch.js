@@ -1,8 +1,6 @@
-import config from 'config.json';
-
 export default class Fetch {
     constructor(url, params = {}) {
-        this.url = config.hostname + url;
+        this.url = process.env.API_URL + url;
         this.params = params;
     }
 

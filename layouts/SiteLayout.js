@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-import DefaultLink from 'components/DefaultLink';
 import colors from 'styles/utils/colors.module.scss';
-import styles from 'styles/components/SiteLayout.module.scss';
 import Carousel from 'components/Carousel';
 
 export default function SiteLayout(props) {
@@ -17,8 +16,8 @@ export default function SiteLayout(props) {
 
     const mappedPosts = props.posts.map(post => {
         return (
-            <div key={post.id}>
-                {post.title}
+            <div className='site__post' key={post.id}>
+                <div className='site__post-inner' style={{ backgroundImage: `url(${post.img})` }}></div>
             </div>
         );
     });
@@ -49,26 +48,26 @@ export default function SiteLayout(props) {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
             </Head>
 
-            <header className={`header fixed-top px-4 ${styles.header} ${scrolled ? 'bg-light' : ''}`}>
-                <h2 className={`${styles.title} ${scrolled ? 'text-dark' : 'text-white'}`}>{title}</h2>
-                <button type="button" className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 ${styles.btn}`}>Связаться</button>
+            <header className={`header fixed-top px-4 site-header ${scrolled ? 'bg-light' : ''}`}>
+                <h2 className={`site-header__title ${scrolled ? 'text-dark' : 'text-white'}`}>{title}</h2>
+                <button type="button" className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 site-header__contact-btn`}>Связаться</button>
             </header>
 
-            <main className={`flex-shrink-0 ${styles.main}`}>
-                <section className={styles.background} style={{ backgroundImage: `url(${background})` }}>
-                    <div className={`${styles.topContent} container-sm`}>
+            <main className={`flex-shrink-0 site`}>
+                <section className='site__background' style={{ backgroundImage: `url(${background})` }}>
+                    <div className={`site__background-content container-sm`}>
                         <h1 className='fs-1'>{title}</h1>
                         <p className='fs-5'>{description}</p>
                     </div>
                 </section>
                 <div className={`container`}>
-                    <section className={`${styles.section}`}>
-                        <h2>Товары и услуги</h2>
+                    <section className='site__section'>
+                        <h2 className='site__section-title'>Товары и услуги</h2>
                         <Carousel
                             items={mappedPosts}
-                            divide={6}
+                            divide={8}
                             id='posts'
-                            className={styles.carousel}
+                            theme='dark'
                         />
                     </section>
                 </div>
@@ -76,7 +75,7 @@ export default function SiteLayout(props) {
 
             <footer className='footer mt-auto py-2 bg-dark'>
                 <div className='container text-white'>
-                    Сделано в <DefaultLink className={`text-decoration-none ${colors.link}`} href='/'>Boxis.io</DefaultLink>
+                    Сделано в <Link href='/'><a className={`text-decoration-none ${colors.link}`}>Boxis.io</a></Link>
                 </div>
             </footer>
         </>

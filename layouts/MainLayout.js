@@ -1,6 +1,5 @@
 import Head from 'next/head';
-
-import DefaultLink from 'components/DefaultLink';
+import Link from 'next/link';
 
 export default function MainLayout(props) {
     return (
@@ -12,7 +11,7 @@ export default function MainLayout(props) {
             <header>
                 <h1>Boxis.io</h1>
                 <nav>
-                    <DefaultLink href='/'>Главная</DefaultLink>
+                    <Link href='/'><a>Главная</a></Link>
                 </nav>
             </header>
 
