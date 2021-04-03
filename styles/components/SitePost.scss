@@ -1,0 +1,134 @@
+.site-post {
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+        width: 33.333%;
+        height: 100%;
+        padding: 0 5px;
+    }
+
+    &__inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+
+    &__info {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, .6);
+        text-align: center;
+        transition: opacity .3s;
+        color: #fff;
+        padding: 0 2%;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+        line-height: normal;
+        margin-bottom: 2.5%;
+
+        @media (max-width: 1200px) {
+            font-size: 16px;
+        }
+
+        @media (max-width: 992px) {
+            font-size: 14px;
+        }
+    }
+
+    &__price {
+        font-size: 16px;
+        line-height: normal;
+
+        @media (max-width: 992px) {
+            font-size: 12px;
+        }
+    }
+
+    &__modal {
+        background: rgba(0, 0, 0, .5);
+        
+        .modal-dialog {
+            max-width: calc(520px + 388px);
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            overflow: hidden;
+        }
+    }
+
+    &__img {
+        width: 520px;
+        height: 520px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__card {
+        width: 388px;
+        height: 520px;
+        padding: 48px;
+
+        &-title {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        &-price {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        &-btn {
+            border-radius: 8px;
+            padding: 5px 20px;
+            background: $blue-400;
+            border-color: $blue-400;
+            margin-bottom: 34px;
+
+            svg {
+                margin-bottom: 5px;
+                width: 14px;
+                height: 14px;
+                margin-right: 7px;
+            }
+        }
+
+        &-description {
+            display: flex;
+            flex-direction: column;
+
+            h6 {
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 14px;
+                color: $gray-600;
+            }
+        }
+    }
+}

@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-
-import Utilities from 'classes/Utilities';
+import Utils from 'classes/Utils';
 
 export default function Carousel({
     items = [],
@@ -8,9 +6,10 @@ export default function Carousel({
     id = 'carousel',
     theme = 'light',
     indicators = false,
+    interval = false,
     reference = null
 }) {
-    const divided = Utilities.divideArray(items, divide);
+    const divided = Utils.divideArray(items, divide);
 
     const result = divided.map((items, index) => {
         return (
@@ -35,7 +34,7 @@ export default function Carousel({
     });
 
     return (
-        <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel'>
+        <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval}>
             {indicators ? <div className='carousel-indicators'>{buttons}</div> : null}
             <div className={`carousel-inner`}>{result}</div>
             {divided.length > 1 ? (

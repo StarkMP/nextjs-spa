@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import Carousel from 'components/Carousel';
+import SitePost from 'components/SitePost';
 
 export default function SiteLayout(props) {
     const [scrolled, setScrolled] = useState(false);
@@ -16,15 +17,7 @@ export default function SiteLayout(props) {
 
     const postsRef = useRef(null);
 
-    const mappedPosts = props.posts.map(post => {
-        return (
-            <div className='site__post' key={post.id}>
-                <div className='site__post-inner' style={{ backgroundImage: `url(${post.img})` }}>
-                    <div className='site__post-info'>{post.title}</div>
-                </div>
-            </div>
-        );
-    });
+    const mappedPosts = props.posts.map(post => <SitePost key={post.id} post={post}/>);
 
     const onScroll = () => {
         if (pageYOffset > 0) {
@@ -34,7 +27,7 @@ export default function SiteLayout(props) {
         }
     };
 
-    // todo костыль
+    // todo полукостыль
     const setupPostsCarouselSize = () => {
         if (!props.posts.length) {
             return;

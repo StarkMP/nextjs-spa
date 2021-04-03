@@ -76,46 +76,6 @@
         }
     }
 
-    &__post {
-        width: 25%;
-        height: 50%;
-        padding: 10px;
-        cursor: pointer;
-
-        @media (max-width: 768px) {
-            width: 33.333%;
-            height: 100%;
-            padding: 0 5px;
-        }
-
-        &-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
-        }
-
-        &-info {
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, .6);
-            text-align: center;
-            transition: opacity .3s;
-            color: #fff;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
-    }
-
     // posts carousel
     .carousel {
         width: 100%;
