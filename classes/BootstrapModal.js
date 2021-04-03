@@ -19,11 +19,7 @@ export default class BootstrapModal {
 
     static open(params = {}) {
         BootstrapModal.render(params.component);
-
-        if (params.className) {
-            BootstrapModal.element.classList.add(params.className)
-        }
-
+        BootstrapModal.addClassName(params.className);
         BootstrapModal.show();
     }
 
@@ -34,4 +30,12 @@ export default class BootstrapModal {
     static hide() {
         BootstrapModal.context.hide();
     }
+
+    static addClassName(className) {
+        if (!className) {
+            return;
+        }
+
+        BootstrapModal.element.classList.add(className)
+    } 
 }
