@@ -7,7 +7,12 @@ import 'styles/app.scss';
 
 function App({ Component, pageProps }) {
     useEffect(() => {
-        BootstrapModal.init(document.getElementById('modal'));
+        BootstrapModal.init(document.getElementById('modal-overlay'));
+
+        return () => {
+            console.log(123)
+            BootstrapModal.destroy();
+        };
     }, []);
 
     return <Component {...pageProps} />

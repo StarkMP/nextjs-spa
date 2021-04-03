@@ -1,34 +1,45 @@
 import ReactDOM from 'react-dom';
 
+import Modal from 'components/Modal';
+
 export default class BootstrapModal {
+    static parent;
     static context;
     static element;
 
-    static init(element, params = {}) {
-        BootstrapModal.element = element;
-        BootstrapModal.context = new bootstrap.Modal(BootstrapModal.element, params);
+    static init(parent) {
+        BootstrapModal.parent = parent;
     }
 
-    static render(component) {
-        if (!component) {
-            throw new Error('Modal component is not defined');
+    static render(component = null, callback) {
+        if (!BootstrapModal.parent) {
+            throw new Error('Parent element is not defined!');
         }
 
-        ReactDOM.render(component, BootstrapModal.element.querySelector('.modal-content'));
+        ReactDOM.render(component, BootstrapModal.parent, callback);
     }
 
     static open(params = {}) {
-        BootstrapModal.render(params.component);
-        BootstrapModal.addClassName(params.className);
-        BootstrapModal.show();
+        if (!BootstrapModal.parent) {
+            throw new Error('Parent element is not defined!');
+        }
+
+        BootstrapModal.render(<Modal id='modal'>{params.component || null}</Modal>, () => {
+            BootstrapModal.element = BootstrapModal.parent.querySelector('#modal');
+            BootstrapModal.context = new bootstrap.Modal(BootstrapModal.element);
+
+            BootstrapModal.addClassName(params.className);
+
+            BootstrapModal.element.addEventListener('hidden.bs.modal', BootstrapModal.destroy);
+            BootstrapModal.context.show();
+        });
     }
 
-    static show() {
-        BootstrapModal.context.show();
-    }
-
-    static hide() {
-        BootstrapModal.context.hide();
+    static destroy() {
+        BootstrapModal.element.removeEventListener('hidden.bs.modal', BootstrapModal.destroy);
+        BootstrapModal.render(null);
+        BootstrapModal.context = null;
+        BootstrapModal.element = null;
     }
 
     static addClassName(className) {
@@ -36,6 +47,6 @@ export default class BootstrapModal {
             return;
         }
 
-        BootstrapModal.element.classList.add(className)
-    } 
+        BootstrapModal.element.classList.add(className);
+    }
 }
