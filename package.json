@@ -17,6 +17,7 @@
     "sass": "^1.32.8"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",
     "eslint-plugin-react": "^7.23.1"
   }

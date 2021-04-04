@@ -9,7 +9,7 @@ export default class Utils {
     static divideArray(array, divide) {
         return new Array(Math.ceil(array.length / divide))
             .fill()
-            .map(_ => array.splice(0, divide));
+            .map(() => array.splice(0, divide));
     }
 
     static formatMoney(n) {

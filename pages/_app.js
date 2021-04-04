@@ -10,7 +10,7 @@ function App({ Component, pageProps }) {
         BootstrapModal.init(document.getElementById('modal-overlay'));
 
         return () => {
-            BootstrapModal.destroy()
+            BootstrapModal.destroy();
         };
     }, []);
 

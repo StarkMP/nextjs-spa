@@ -8,6 +8,7 @@
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -19,9 +20,12 @@
         "react"
     ],
     "rules": {
+        "react/prop-types": 0,
+        "react/react-in-jsx-scope": 0,
+        "no-undef": 0,
         "indent": [
             "error",
-            "space"
+            4
         ],
         "linebreak-style": [
             "error",

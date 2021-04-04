@@ -21,7 +21,7 @@ export default function Site(props) {
 //     });
 // }
 
-export async function getServerSideProps({ query, req }) {
+export async function getServerSideProps({ query }) {
     const url = `/api/v1/websites/${query.id}`;
     const details = new Fetch(`${url}/details`);
     const posts = new Fetch(`${url}/posts`);

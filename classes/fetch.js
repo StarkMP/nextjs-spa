@@ -5,15 +5,18 @@ export default class Fetch {
     }
 
     request() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await fetch(this.url, this.params);
-                const json = await response.json();
+        return new Promise((resolve, reject) => {
+            fetch(this.url, this.params).then(response => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
 
-                resolve({ response, json });
-            } catch(error) {
+                response.json().then(json => {
+                    resolve({ response, json });
+                });
+            }).catch(error => {
                 reject({ error });
-            }
+            });
         });
     }
 }

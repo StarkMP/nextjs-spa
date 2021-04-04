@@ -97,21 +97,21 @@ export default function SiteLayout(props) {
                 <button type="button" className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 site-header__contact-btn`}>Связаться</button>
             </header>
 
-            <main className={`flex-shrink-0 site`}>
+            <main className='flex-shrink-0 site'>
                 <section className='site__background' style={{ backgroundImage: `url(${background})` }}>
-                    <div className={`site__background-content container-sm`}>
+                    <div className='site__background-content container-sm'>
                         <h1 className='fs-1'>{title}</h1>
                         <p className='fs-5'>{description}</p>
                     </div>
                 </section>
-                <div className={`container`}>
+                <div className='container'>
                     {postsSection}
                 </div>
             </main>
 
             <footer className='footer mt-auto py-2 bg-dark site-footer'>
                 <div className='container text-white'>
-                    Сделано в <Link href='/'><a className={`text-decoration-none site-footer__link`}>Boxis.io</a></Link>
+                    Сделано в <Link href='/'><a className='text-decoration-none site-footer__link'>Boxis.io</a></Link>
                 </div>
             </footer>
         </>

@@ -36,7 +36,7 @@ export default function Carousel({
     return (
         <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval}>
             {indicators ? <div className='carousel-indicators'>{buttons}</div> : null}
-            <div className={`carousel-inner`}>{result}</div>
+            <div className='carousel-inner'>{result}</div>
             {divided.length > 1 ? (
                 <>
                     <button className='carousel-control carousel-control-prev' type='button' data-bs-target={`#${id}`} data-bs-slide='prev'>
