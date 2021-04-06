@@ -4,16 +4,20 @@ export default class Fetch {
         this.params = params;
     }
 
-    request() {
+    request(toJSON) {
         return new Promise((resolve, reject) => {
             fetch(this.url, this.params).then(response => {
                 if (!response.ok) {
                     throw new Error(response.status);
                 }
 
-                response.json().then(json => {
-                    resolve({ response, json });
-                });
+                if (toJSON) {
+                    response.json().then(json => {
+                        resolve({ response, json });
+                    });
+                } else {
+                    resolve({ response });
+                }
             }).catch(error => {
                 reject({ error });
             });

@@ -15,9 +15,12 @@ export default function Site(props) {
     );
 }
 
-// export async function getServerSideProps({ query, req}) {
-//     return SSR.Props({
+// export async function getServerSideProps({ query }) {
+//     const url = `/api/v1/websites/${query.id}`;
 
+//     return SSR.getServerSideProps({
+//         details: `${url}/details`,
+//         posts: `${url}/posts`
 //     });
 // }
 
@@ -28,8 +31,8 @@ export async function getServerSideProps({ query }) {
 
     try {
         const res = await Promise.all([
-            details.request(),
-            posts.request()
+            details.request(true),
+            posts.request(true)
         ]);
 
         return {
