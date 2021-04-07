@@ -67,13 +67,35 @@
         
         .modal-dialog {
             max-width: calc(520px + 388px);
+
+            @media (max-width: 991px) {
+                max-width: unset;
+                height: unset;
+            }
         }
 
         .modal-content {
             display: flex;
             flex-direction: row;
             align-items: center;
-            overflow: hidden;
+            position: relative;
+
+            @media (max-width: 991px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .modal-close {
+            @media (max-width: 991px) {
+                left: 12px;
+                top: 10px;
+
+                svg {
+                    color: #fff;
+                    filter: drop-shadow(0 0 1px rgba(0, 0, 0, .7));
+                }
+            }
         }
     }
 
@@ -83,12 +105,23 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+
+        @media (max-width: 991px) {
+            width: 100vw;
+            height: 100vw;
+        }
     }
 
     &__card {
         width: 388px;
         height: 520px;
         padding: 48px;
+
+        @media (max-width: 991px) {
+            height: unset;
+            width: 100%;
+            padding: 40px;
+        }
 
         &-title {
             font-size: 20px;

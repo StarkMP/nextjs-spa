@@ -88,13 +88,13 @@ export default function SiteLayout(props) {
         <>
             <Head>
                 <title>{title}</title>
-                <meta charSet="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta charSet='utf-8'/>
+                <meta name='viewport' content='width=device-width, initial-scale=1'/>
             </Head>
 
             <header className={`header fixed-top px-4 site-header ${scrolled ? 'bg-light' : ''}`}>
                 <h2 className={`site-header__title ${scrolled ? 'text-dark' : 'text-white'}`}>{title}</h2>
-                <button type="button" className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 site-header__contact-btn`}>Связаться</button>
+                <button type='button' className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 site-header__contact-btn`}>Связаться</button>
             </header>
 
             <main className='flex-shrink-0 site'>
