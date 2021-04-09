@@ -1,12 +1,19 @@
 import { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
-export default function PortalOverlay({ children, parent, className }) {
+Portal.propTypes = {
+    children: PropTypes.node.isRequired,
+    parent: PropTypes.node.isRequired,
+    className: PropTypes.string
+};
+
+export default function Portal({ children, parent, className }) {
     const el = useMemo(() => document.createElement('div'), []);
 
     useEffect(() => {
         const target = parent && parent.appendChild ? parent : document.body;
-        const classList = ['portal-overlay'];
+        const classList = ['portal'];
 
         if (className) {
             className.split(' ').forEach((item) => classList.push(item));

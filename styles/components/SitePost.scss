@@ -1,3 +1,5 @@
+$width-for-fullscreen: 991px;
+
 .site-post {
     width: 25%;
     height: 50%;
@@ -68,7 +70,7 @@
         .modal-dialog {
             max-width: calc(520px + 388px);
 
-            @media (max-width: 991px) {
+            @media (max-width: $width-for-fullscreen) {
                 max-width: unset;
                 height: unset;
             }
@@ -80,14 +82,14 @@
             align-items: center;
             position: relative;
 
-            @media (max-width: 991px) {
+            @media (max-width: $width-for-fullscreen) {
                 flex-direction: column;
                 align-items: flex-start;
             }
         }
 
         .modal-close {
-            @media (max-width: 991px) {
+            @media (max-width: $width-for-fullscreen) {
                 left: 12px;
                 top: 10px;
 
@@ -106,7 +108,7 @@
         background-position: center;
         background-repeat: no-repeat;
 
-        @media (max-width: 991px) {
+        @media (max-width: $width-for-fullscreen) {
             width: 100vw;
             height: 100vw;
         }
@@ -117,7 +119,7 @@
         height: 520px;
         padding: 48px;
 
-        @media (max-width: 991px) {
+        @media (max-width: $width-for-fullscreen) {
             height: unset;
             width: 100%;
             padding: 40px;

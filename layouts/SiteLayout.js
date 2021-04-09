@@ -1,9 +1,16 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 import Carousel from 'components/Carousel';
 import SitePost from 'components/SitePost';
+import Values from 'classes/Values';
+
+SiteLayout.propTypes = {
+    children: PropTypes.node,
+    details: PropTypes.object
+};
 
 export default function SiteLayout(props) {
     const [scrolled, setScrolled] = useState(false);
@@ -111,7 +118,7 @@ export default function SiteLayout(props) {
 
             <footer className='footer mt-auto py-2 bg-dark site-footer'>
                 <div className='container text-white'>
-                    Сделано в <Link href='/'><a className='text-decoration-none site-footer__link'>Boxis.io</a></Link>
+                    Сделано в <Link href='/'><a className='text-decoration-none site-footer__link'>{Values.projectName}</a></Link>
                 </div>
             </footer>
         </>

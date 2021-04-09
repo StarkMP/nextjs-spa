@@ -1,7 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
-export default function MainLayout(props) {
+MainLayout.propTypes = {
+    children: PropTypes.node
+};
+
+export default function MainLayout({
+    children = null
+}) {
     return (
         <>
             <Head>
@@ -16,7 +23,7 @@ export default function MainLayout(props) {
             </header>
 
             <main>
-                {props.children}
+                {children}
             </main>
 
             <footer>

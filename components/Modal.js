@@ -1,6 +1,17 @@
 import { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Portal from 'components/Portal';
+
+Modal.propTypes = {
+    open: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    hideCloseButton: PropTypes.bool,
+    className: PropTypes.string,
+    dialogClassName: PropTypes.string,
+    contentClassName: PropTypes.string,
+    onClose: PropTypes.func.isRequired
+};
 
 export default function Modal({
     open = false,

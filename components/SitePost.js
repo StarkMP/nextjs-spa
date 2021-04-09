@@ -1,6 +1,12 @@
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Utils from 'classes/Utils';
 import Modal from 'components/Modal';
-import { useState } from 'react';
+
+SitePost.propTypes = {
+    post: PropTypes.object.isRequired
+};
 
 export default function SitePost({ post }) {
     const [activeModal, setActiveModal] = useState(false);

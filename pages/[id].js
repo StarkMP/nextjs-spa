@@ -1,16 +1,25 @@
 import NotFound from 'pages/404';
 import SiteLayout from 'layouts/SiteLayout';
 import Fetch from 'classes/Fetch';
+import PropTypes from 'prop-types';
 
-export default function Site(props) {
-    if (!Object.keys(props).length) {
+Site.propTypes = {
+    details: PropTypes.object.isRequired,
+    posts: PropTypes.array
+};
+
+export default function Site({
+    details = {},
+    posts = []
+}) {
+    if (!Object.keys(details).length) {
         return <NotFound/>;
     }
 
     return (
         <SiteLayout
-            details={props.details}
-            posts={props.posts}
+            details={details}
+            posts={posts}
         />
     );
 }

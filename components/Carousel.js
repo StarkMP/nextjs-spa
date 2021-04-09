@@ -1,4 +1,16 @@
+import PropTypes from 'prop-types';
+
 import Utils from 'classes/Utils';
+
+Carousel.propTypes = {
+    items: PropTypes.array.isRequired,
+    divide: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    theme: PropTypes.string,
+    indicators: PropTypes.bool,
+    interval: PropTypes.number,
+    reference: PropTypes.object
+};
 
 export default function Carousel({
     items = [],
@@ -6,7 +18,7 @@ export default function Carousel({
     id = 'carousel',
     theme = 'light',
     indicators = false,
-    interval = false,
+    interval = 0,
     reference = null
 }) {
     const divided = Utils.divideArray(items, divide);
@@ -34,7 +46,7 @@ export default function Carousel({
     });
 
     return (
-        <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval}>
+        <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval || 'false'}>
             {indicators ? <div className='carousel-indicators'>{buttons}</div> : null}
             <div className='carousel-inner'>{result}</div>
             {divided.length > 1 ? (
