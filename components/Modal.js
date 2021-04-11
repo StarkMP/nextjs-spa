@@ -51,7 +51,7 @@ export default function Modal({
                 }
             }
         };
-    }, [open]);
+    }, [open, onClose]);
 
     return active || open ? (
         <Portal parent='body'>

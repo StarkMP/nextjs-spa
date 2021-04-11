@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Utils from 'classes/Utils';
@@ -13,7 +13,7 @@ export default function SitePost({ post }) {
 
     const formattedPrice = useMemo(() => Utils.formatMoney(post.price), [post.price]);
 
-    const closeModal = () => setActiveModal(false);
+    const closeModal = useCallback(() => setActiveModal(false), []);
     const openModal = () => setActiveModal(true);
 
     return (

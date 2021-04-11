@@ -32,7 +32,7 @@ export default function Carousel({
                 </div>
             </div>
         );
-    }), [items, divide]);
+    }), [divided]);
 
     const buttons = useMemo(() => divided.map((items, index) => {
         return <button
@@ -44,7 +44,7 @@ export default function Carousel({
             data-bs-slide-to={index}
             aria-label={`Item #${index}`}
         ></button>;
-    }), [items, divide, id]);
+    }), [divided, id]);
 
     return (
         <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval || 'false'}>
