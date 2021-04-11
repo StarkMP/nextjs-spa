@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
@@ -24,7 +24,7 @@ export default function SiteLayout(props) {
 
     const postsRef = useRef(null);
 
-    const mappedPosts = props.posts.map(post => <SitePost key={post.id} post={post}/>);
+    const mappedPosts = useMemo(() => props.posts.map(post => <SitePost key={post.id} post={post}/>), [props.posts]);
 
     const onScroll = () => {
         if (pageYOffset > 0) {
@@ -34,7 +34,6 @@ export default function SiteLayout(props) {
         }
     };
 
-    // todo полукостыль
     const setupPostsCarouselSize = () => {
         if (!props.posts.length) {
             return;
@@ -78,18 +77,20 @@ export default function SiteLayout(props) {
         };
     }, []);
 
-    const postsSection = props.posts.length ? (
-        <section id='posts' className='site__section'>
-            <h2 className='site__section-title'>Товары и услуги</h2>
-            <Carousel
-                items={mappedPosts}
-                divide={divide}
-                id='posts-carousel'
-                theme='dark'
-                reference={postsRef}
-            />
-        </section>
-    ) : null;
+    const postsSection = useMemo(() => {
+        return props.posts.length ? (
+            <section id='posts' className='site__section'>
+                <h2 className='site__section-title'>Товары и услуги</h2>
+                <Carousel
+                    items={mappedPosts}
+                    divide={divide}
+                    id='posts-carousel'
+                    theme='dark'
+                    reference={postsRef}
+                />
+            </section>
+        ) : null;
+    }, [props.posts, divide, postsRef]);
 
     return (
         <>

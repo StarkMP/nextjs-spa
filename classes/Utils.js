@@ -7,9 +7,11 @@ export default class Utils {
     }
 
     static divideArray(array, divide) {
-        return new Array(Math.ceil(array.length / divide))
+        const copy = array.slice();
+
+        return new Array(Math.ceil(copy.length / divide))
             .fill()
-            .map(() => array.splice(0, divide));
+            .map(() => copy.splice(0, divide));
     }
 
     static formatMoney(n) {

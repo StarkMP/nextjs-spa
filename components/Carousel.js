@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import Utils from 'classes/Utils';
@@ -21,9 +22,9 @@ export default function Carousel({
     interval = 0,
     reference = null
 }) {
-    const divided = Utils.divideArray(items, divide);
+    const divided = useMemo(() => Utils.divideArray(items, divide), [items, divide]);
 
-    const result = divided.map((items, index) => {
+    const result = useMemo(() => divided.map((items, index) => {
         return (
             <div key={index + items.length} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                 <div className='carousel-item__inner'>
@@ -31,9 +32,9 @@ export default function Carousel({
                 </div>
             </div>
         );
-    });
+    }), [items, divide]);
 
-    const buttons = divided.map((items, index) => {
+    const buttons = useMemo(() => divided.map((items, index) => {
         return <button
             key={index}
             type='button'
@@ -43,7 +44,7 @@ export default function Carousel({
             data-bs-slide-to={index}
             aria-label={`Item #${index}`}
         ></button>;
-    });
+    }), [items, divide, id]);
 
     return (
         <div ref={reference} id={id} className={`carousel slide carousel-${theme}`} data-bs-ride='carousel' data-bs-interval={interval || 'false'}>

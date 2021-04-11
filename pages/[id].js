@@ -4,15 +4,12 @@ import Fetch from 'classes/Fetch';
 import PropTypes from 'prop-types';
 
 Site.propTypes = {
-    details: PropTypes.object.isRequired,
+    details: PropTypes.object,
     posts: PropTypes.array
 };
 
-export default function Site({
-    details = {},
-    posts = []
-}) {
-    if (!Object.keys(details).length) {
+export default function Site({ details, posts }) {
+    if (!details) {
         return <NotFound/>;
     }
 
