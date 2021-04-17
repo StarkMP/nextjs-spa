@@ -1,7 +1,7 @@
 {
     "websites": [
         {
-            "id": "coffehouse",
+            "id": "coffeehouse",
             "title": "Кофе-хаус",
             "description": "Уютная кофейня в самом центре Санкт-Петербурга. Здесь Вы сможете насладиться ароматным, вкусным кофе из авторских зерновых подборок.",
             "background": "https://i.imgur.com/rxKbd9D.jpg",
@@ -12,9 +12,13 @@
             },
             "posts": [0, 1, 2, 3, 4, 5, 6, 7, 8],
             "constructor": {
+                "mainInfo": {
+                    "align": "center"
+                },
                 "contactButton": {
                     "name": "Связаться"
-                }
+                },
+                "sections": []
             }
         }
     ],

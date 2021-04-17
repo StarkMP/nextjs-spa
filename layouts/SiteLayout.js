@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { useLocalizer } from 'reactjs-localizer';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import Carousel from 'components/Carousel';
 import SitePost from 'components/SitePost';
+import SiteSection from 'components/SiteSection';
 import Values from 'classes/Values';
 
 SiteLayout.propTypes = {
@@ -19,10 +21,14 @@ export default function SiteLayout(props) {
     const {
         title,
         background,
-        description
+        description,
+        favicon,
+        constructor,
+        credits
     } = props.details;
 
     const postsRef = useRef(null);
+    const { localize } = useLocalizer();
 
     const mappedPosts = useMemo(() => props.posts.map(post => <SitePost key={post.id} post={post}/>), [props.posts]);
 
@@ -79,8 +85,7 @@ export default function SiteLayout(props) {
 
     const postsSection = useMemo(() => {
         return props.posts.length ? (
-            <section id='posts' className='site__section'>
-                <h2 className='site__section-title'>Товары и услуги</h2>
+            <SiteSection id='posts' title='Товары и услуги'>
                 <Carousel
                     items={mappedPosts}
                     divide={divide}
@@ -88,9 +93,28 @@ export default function SiteLayout(props) {
                     theme='dark'
                     reference={postsRef}
                 />
-            </section>
+            </SiteSection>
         ) : null;
     }, [props.posts, divide, postsRef]);
+
+    // todo
+    const navigation = useMemo(() => {
+        const defaultSections = [
+            { title: 'Главная', id: 'home' },
+            { title: 'Товары и услуги', id: 'posts' },
+        ];
+
+        return defaultSections.concat([]).map((item, index) => {
+            return (
+                <li key={index} className='nav-item'>
+                    <a href={`#${item.id}`} className={`nav-link ${scrolled ? 'text-dark' : 'text-light'}`}>{item.title}</a>
+                </li>
+            );
+        });
+    }, [scrolled]);
+
+    // todo
+    const customSections = null;
 
     return (
         <>
@@ -102,11 +126,12 @@ export default function SiteLayout(props) {
 
             <header className={`header fixed-top px-4 site-header ${scrolled ? 'bg-light' : ''}`}>
                 <h2 className={`site-header__title ${scrolled ? 'text-dark' : 'text-white'}`}>{title}</h2>
+                <nav className='nav'>{navigation}</nav>
                 <button type='button' className={`btn btn-sm ${scrolled ? 'btn-outline-dark' : 'btn-outline-light'} px-3 site-header__contact-btn`}>Связаться</button>
             </header>
 
             <main className='flex-shrink-0 site'>
-                <section className='site__background' style={{ backgroundImage: `url(${background})` }}>
+                <section id='home' className='site__background' style={{ backgroundImage: `url(${background})` }}>
                     <div className='site__background-content container-sm'>
                         <h1 className='fs-1'>{title}</h1>
                         <p className='fs-5'>{description}</p>
@@ -114,12 +139,13 @@ export default function SiteLayout(props) {
                 </section>
                 <div className='container'>
                     {postsSection}
+                    {customSections}
                 </div>
             </main>
 
             <footer className='footer mt-auto py-2 bg-dark site-footer'>
                 <div className='container text-white'>
-                    Сделано в <Link href='/'><a className='text-decoration-none site-footer__link'>{Values.projectName}</a></Link>
+                    {localize('Made in')} <Link href='/'><a className='text-decoration-none site-footer__link'>{Values.projectName}</a></Link>
                 </div>
             </footer>
         </>

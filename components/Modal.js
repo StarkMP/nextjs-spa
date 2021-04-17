@@ -54,7 +54,7 @@ export default function Modal({
     }, [open, onClose]);
 
     return active || open ? (
-        <Portal parent='body'>
+        <Portal parent={document.querySelector('#__next')}>
             <div ref={reference} id='modal' tabIndex='-1' className={`modal ${className}`}>
                 <div className={`modal-dialog modal-dialog-centered ${dialogClassName}`}>
                     <div className={`modal-content ${contentClassName}`}>
