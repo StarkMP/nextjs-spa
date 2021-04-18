@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "jquery": true
     },
     "extends": [
         "eslint:recommended",
@@ -23,11 +24,12 @@
     ],
     "rules": {
         "jsx-quotes": ["error", "prefer-single"],
+        "react/jsx-fragments": ["error", "element"],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "react/react-in-jsx-scope": 0,
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "react/react-in-jsx-scope": 0,
         "no-undef": 1,
         "indent": [
             "error",

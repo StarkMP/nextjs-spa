@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -10,7 +11,7 @@ export default function MainLayout({
     children = null
 }) {
     return (
-        <>
+        <Fragment>
             <Head>
                 <title>Boxis.io</title>
             </Head>
@@ -29,6 +30,6 @@ export default function MainLayout({
             <footer>
                 footer
             </footer>
-        </>
+        </Fragment>
     );
 }

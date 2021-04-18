@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import Utils from 'classes/Utils';
@@ -51,7 +51,7 @@ export default function Carousel({
             {indicators ? <div className='carousel-indicators'>{buttons}</div> : null}
             <div className='carousel-inner'>{result}</div>
             {divided.length > 1 ? (
-                <>
+                <Fragment>
                     <button className='carousel-control carousel-control-prev' type='button' data-bs-target={`#${id}`} data-bs-slide='prev'>
                         <span className='carousel-control-icon carousel-control-prev-icon' aria-hidden='true'></span>
                         <span className='visually-hidden'>Назад</span>
@@ -60,7 +60,7 @@ export default function Carousel({
                         <span className='carousel-control-icon carousel-control-next-icon' aria-hidden='true'></span>
                         <span className='visually-hidden'>Далее</span>
                     </button>
-                </>
+                </Fragment>
             ) : null}
         </div>
     );

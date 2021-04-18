@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { Fragment, useEffect, useRef, useState, useMemo } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -11,6 +11,7 @@ import Values from 'classes/Values';
 
 SiteLayout.propTypes = {
     children: PropTypes.node,
+    posts: PropTypes.array,
     details: PropTypes.object
 };
 
@@ -22,9 +23,9 @@ export default function SiteLayout(props) {
         title,
         background,
         description,
-        favicon,
-        constructor,
-        credits
+        // favicon,
+        // constructor,
+        // credits
     } = props.details;
 
     const postsRef = useRef(null);
@@ -117,7 +118,7 @@ export default function SiteLayout(props) {
     const customSections = null;
 
     return (
-        <>
+        <Fragment>
             <Head>
                 <title>{title}</title>
                 <meta charSet='utf-8'/>
@@ -148,6 +149,6 @@ export default function SiteLayout(props) {
                     {localize('Made in')} <Link href='/'><a className='text-decoration-none site-footer__link'>{Values.projectName}</a></Link>
                 </div>
             </footer>
-        </>
+        </Fragment>
     );
 }
