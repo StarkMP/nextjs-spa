@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { Fragment, useEffect, useRef, useState, useMemo } from 'react';
+import { Fragment, useEffect, useState, useMemo } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 
 import Carousel from 'components/Carousel';
 import SitePost from 'components/SitePost';
@@ -17,7 +18,6 @@ SiteLayout.propTypes = {
 
 export default function SiteLayout(props) {
     const [scrolled, setScrolled] = useState(false);
-    const [divide, setDivide] = useState(8);
 
     const {
         title,
@@ -28,9 +28,7 @@ export default function SiteLayout(props) {
         // credits
     } = props.details;
 
-    const postsRef = useRef(null);
     const { localize } = useLocalizer();
-
     const mappedPosts = useMemo(() => props.posts.map(post => <SitePost key={post.id} post={post}/>), [props.posts]);
 
     const onScroll = () => {
@@ -41,62 +39,40 @@ export default function SiteLayout(props) {
         }
     };
 
-    const setupPostsCarouselSize = () => {
-        if (!props.posts.length) {
-            return;
-        }
-
-        const $carousel = $(postsRef.current);
-        const scrW = $(window).width();
-
-        let carouselWidth = 0;
-
-        if (scrW <= 768-17) {
-            carouselWidth = $carousel.width() / 3;
-            setDivide(3);
-        } else {
-            carouselWidth = $carousel.width() / 2;
-            setDivide(8);
-
-            if (props.posts.length < 5) {
-                carouselWidth /= 2;
-                $(postsRef.current).find('.site__post').css({ height: '100%' });
-            }
-        }
-
-        if ($carousel.height() !== carouselWidth) {
-            $carousel.height(carouselWidth);
-        }
-    };
-
     useEffect(() => {
         const $document = $(document);
-        const $window = $(window);
 
         $document.on('scroll', onScroll);
-        $window.on('resize', setupPostsCarouselSize);
-
-        setupPostsCarouselSize();
 
         return () => {
             $document.off('scroll', onScroll);
-            $window.off('resize', setupPostsCarouselSize);
         };
     }, []);
 
     const postsSection = useMemo(() => {
+        const settings = {
+            infinite: true,
+            rows: 2,
+            slidesPerRow: 4,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        rows: 1,
+                        slidesPerRow: 1,
+                        variableWidth: true,
+                        swipeToSlide: true
+                    }
+                }
+            ]
+        };
+
         return props.posts.length ? (
             <SiteSection id='posts' title='Товары и услуги'>
-                <Carousel
-                    items={mappedPosts}
-                    divide={divide}
-                    id='posts-carousel'
-                    theme='dark'
-                    reference={postsRef}
-                />
+                <Carousel settings={settings}>{mappedPosts}</Carousel>
             </SiteSection>
         ) : null;
-    }, [props.posts, divide, postsRef]);
+    }, [props.posts, mappedPosts]);
 
     // todo
     const navigation = useMemo(() => {
