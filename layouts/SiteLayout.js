@@ -54,6 +54,8 @@ export default function SiteLayout(props) {
             infinite: true,
             rows: 2,
             slidesPerRow: 4,
+            prevArrow: '<button type="button" class="slick-prev">Previous<i class="bi bi-arrow-left-short"></i></button>',
+            nextArrow: '<button type="button" class="slick-next">Next<i class="bi bi-arrow-right-short"></i></button>',
             responsive: [
                 {
                     breakpoint: 768,

@@ -1,3 +1,5 @@
+@import '../layouts';
+
 .site-header {
     display: flex;
     align-items: center;
@@ -36,6 +38,13 @@
     display: flex;
     flex-direction: column;
 
+    .container {
+        @media (max-width: 767px) {
+            margin: 0;
+            max-width: 100%;
+        }
+    }
+
     &__background {
         height: 79.5vh;
         width: 100%;
@@ -45,10 +54,7 @@
         position: relative;
 
         &-content {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            @extend %absolute-center;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -117,6 +123,12 @@
 
             @media (max-width: 767px) {
                 display: none !important;
+            }
+
+            i {
+                color: rgb(20, 20, 20);
+                font-size: 30px;
+                @extend %absolute-center;
             }
         }
 

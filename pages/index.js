@@ -8,7 +8,7 @@ export default function Home() {
                 <h4>Примеры сайтов:</h4>
                 <ul>
                     <li>
-                        <Link href='/[id]' as={'/coffehouse'}><a>Кофе-хаус</a></Link>
+                        <Link href='/[id]' as={'/coffeehouse'}><a>Кофе-хаус</a></Link>
                     </li>
                 </ul>
             </section>
