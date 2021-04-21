@@ -1,13 +1,12 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-MainLayout.propTypes = {
+PersonalLayout.propTypes = {
     children: PropTypes.node
 };
 
-export default function MainLayout({
+export default function PersonalLayout({
     children = null
 }) {
     return (
@@ -18,9 +17,6 @@ export default function MainLayout({
 
             <header>
                 <h1>Boxis.io</h1>
-                <nav>
-                    <Link href='/'><a>Главная</a></Link>
-                </nav>
             </header>
 
             <main>

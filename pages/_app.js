@@ -6,8 +6,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import locales from 'locales.json';
 import 'styles/app.scss';
 
-Localizer.mount(locales);
 Localizer.defaultLanguage = 'ru';
+Localizer.mount(locales);
 
 App.propTypes = {
     Component: PropTypes.elementType,
