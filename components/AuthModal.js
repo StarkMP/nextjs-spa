@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
 import Modal from 'components/Modal';
+import Fetch from 'classes/Fetch';
+import UserAccess from 'classes/UserAccess';
 
 AuthModal.propTypes = {
     open: PropTypes.bool.isRequired,
@@ -26,6 +28,48 @@ export default function AuthModal({ open, login, onClose, onSetType }) {
     const onChangeEmail = (e) => setEmail(e.target.value);
     const onChangePassword = (e) => setPassword(e.target.value);
 
+    const handleRequest = async () => {
+        let fetch;
+
+        if (type) {
+            const formData = new FormData();
+
+            formData.append('grant_type', 'password');
+            formData.append('username', email);
+            formData.append('password', password);
+
+            fetch = new Fetch('/api/v1/oauth2/token', {
+                method: 'POST',
+                body: formData
+            });
+
+            try {
+                const response = await fetch.request(true);
+
+                UserAccess.set(response.json);
+                console.log('Вы успешно залогинены', response.json);
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            fetch = new Fetch('/api/v1/registrations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            try {
+                await fetch.request();
+
+                console.log('Подтвердите почту');
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
+
     return (
         <Modal
             open={open}
@@ -44,7 +88,7 @@ export default function AuthModal({ open, login, onClose, onSetType }) {
                         <input onChange={onChangePassword} type='password' className='form-control' id='password' value={password}/>
                     </div>
                     <div className='d-flex align-items-center'>
-                        <button type='button' className='btn btn-success'>{localize('Sign in')}</button>
+                        <button onClick={handleRequest} type='button' className='btn btn-success'>{localize('Sign in')}</button>
                         <p onClick={() => onSetType(false)} className='mb-0 link-primary'>Нет аккаунта? Зарегистрироваться</p>
                     </div>
                 </form>
@@ -60,7 +104,7 @@ export default function AuthModal({ open, login, onClose, onSetType }) {
                         <input onChange={onChangePassword} type='password' className='form-control' id='password' value={password}/>
                     </div>
                     <div className='d-flex align-items-center'>
-                        <button type='button' className='btn btn-success'>{localize('Sign up')}</button>
+                        <button onClick={handleRequest} type='button' className='btn btn-success'>{localize('Sign up')}</button>
                         <p onClick={() => onSetType(true)} className='mb-0 link-primary'>Есть аккаунт? Войти</p>
                     </div>
                 </form>

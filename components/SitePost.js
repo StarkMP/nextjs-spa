@@ -1,20 +1,19 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import Utils from 'classes/Utils';
 import Modal from 'components/Modal';
+import useModal from 'hooks/useModal';
 
 SitePost.propTypes = {
     post: PropTypes.object.isRequired
 };
 
 export default function SitePost({ post }) {
-    const [activeModal, setActiveModal] = useState(false);
-
     const formattedPrice = useMemo(() => Utils.formatMoney(post.price), [post.price]);
-
-    const closeModal = useCallback(() => setActiveModal(false), []);
-    const openModal = () => setActiveModal(true);
+    const modal = useModal();
+    
+    const openModal = () => modal.setActive(true);
 
     return (
         <div className='site-post' onClick={openModal}>
@@ -26,8 +25,8 @@ export default function SitePost({ post }) {
             </div>
 
             <Modal
-                open={activeModal}
-                onClose={closeModal}
+                open={modal.active}
+                onClose={modal.onClose}
                 className='fade site-post__modal'
                 dialogClassName='modal-fullscreen-lg-down'
             >

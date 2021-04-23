@@ -1,17 +1,20 @@
 import Link from 'next/link';
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
 import AuthModal from 'components/AuthModal';
+import useModal from 'hooks/useModal';
 
 export default function Landing() {
-    const [authModal, setAuthModal] = useState({ open: false, type: false });
+    const [authType, setAuthType] = useState(false);
 
     const { localize } = useLocalizer();
+    const authModal = useModal();
 
-    const closeAuthModal = useCallback(() => setAuthModal(prev => ({ ...prev, open: false })), []);
-    const openAuthModal = (type) => setAuthModal({ open: true, type });
-    const setAuthModalType = useCallback((type) => setAuthModal(prev => ({ ...prev, type })), []);
+    const openAuthModal = (type) => {
+        setAuthType(type);
+        authModal.setActive(true);
+    };
 
     return (
         <Fragment>
@@ -32,10 +35,10 @@ export default function Landing() {
             </main>
 
             <AuthModal
-                open={authModal.open}
-                login={authModal.type}
-                onClose={closeAuthModal}
-                onSetType={setAuthModalType}
+                open={authModal.active}
+                login={authType}
+                onClose={authModal.onClose}
+                onSetType={setAuthType}
             />
         </Fragment>
     );

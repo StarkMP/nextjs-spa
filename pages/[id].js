@@ -21,15 +21,6 @@ export default function Site({ details, posts }) {
     );
 }
 
-// export async function getServerSideProps({ query }) {
-//     const url = `/api/v1/websites/${query.id}`;
-
-//     return SSR.getServerSideProps({
-//         details: `${url}/details`,
-//         posts: `${url}/posts`
-//     });
-// }
-
 export async function getServerSideProps({ query }) {
     const url = `/api/v1/websites/${query.id}`;
     const details = new Fetch(`${url}/details`);
