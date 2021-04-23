@@ -1,37 +1,17 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import jwt from 'jsonwebtoken';
+import dynamic from 'next/dynamic';
 
 import Fetch from 'classes/Fetch';
 import NotFound from 'pages/404';
-import Utils from 'classes/Utils';
 
 Confirm.propTypes = {
-    confirmationCode: PropTypes.string,
+    email: PropTypes.string,
     confirmed: PropTypes.bool.isRequired,
     resend: PropTypes.bool.isRequired
 };
 
-export default function Confirm({ confirmationCode, confirmed, resend }) {
-    const [email, setEmail] = useState('');
-
-    useEffect(() => {
-        if (!confirmationCode) {
-            return;
-        }
-
-        try {
-            const { email } = Utils.client.parseJWT(confirmationCode);
-
-            setEmail(email);
-        } catch (err) {
-            return;
-        }
-    }, [confirmationCode]);
-
-    if (!confirmationCode) {
-        return <NotFound/>;
-    }
-
+function Confirm({ email, confirmed, resend }) {
     if (!email) {
         return <NotFound/>;
     }
@@ -49,7 +29,7 @@ export default function Confirm({ confirmationCode, confirmed, resend }) {
     );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, res }) {
     const confirmationCode = query.confirmationCode;
     const empty = {
         props: {
@@ -59,6 +39,21 @@ export async function getServerSideProps({ query }) {
     };
 
     if (!confirmationCode) {
+        res.statusCode = 404;
+        return empty;
+    }
+
+    const decoded = jwt.decode(confirmationCode);
+
+    if (!decoded) {
+        res.statusCode = 404;
+        return empty;
+    }
+
+    const email = decoded.email;
+
+    if (!email) {
+        res.statusCode = 404;
         return empty;
     }
 
@@ -75,7 +70,7 @@ export async function getServerSideProps({ query }) {
 
         return {
             props: {
-                confirmationCode,
+                email,
                 confirmed: true,
                 resend: false
             }
@@ -84,13 +79,18 @@ export async function getServerSideProps({ query }) {
         if (err.message === '422') {
             return {
                 props: {
-                    confirmationCode,
+                    email,
                     confirmed: false,
                     resend: true
                 }
             };
         }
 
+        res.statusCode = 404;
         return empty;
     }
 }
+
+export default dynamic(() => Promise.resolve(Confirm), {
+    ssr: false
+});

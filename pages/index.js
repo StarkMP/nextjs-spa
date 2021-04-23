@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
-import AuthModal from 'components/AuthModal';
 import useModal from 'hooks/useModal';
+import AuthModal from 'components/AuthModal';
 
 export default function Landing() {
     const [authType, setAuthType] = useState(false);

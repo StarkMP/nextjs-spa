@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 
 import Portal from 'components/Portal';
 
@@ -13,7 +14,7 @@ Modal.propTypes = {
     onClose: PropTypes.func.isRequired
 };
 
-export default function Modal({
+function Modal({
     open = false,
     children = null,
     hideCloseButton = false,
@@ -72,3 +73,7 @@ export default function Modal({
         </Portal>
     ) : null;
 }
+
+export default dynamic(() => Promise.resolve(Modal), {
+    ssr: false
+});

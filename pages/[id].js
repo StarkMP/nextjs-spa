@@ -21,7 +21,7 @@ export default function Site({ details, posts }) {
     );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, res }) {
     const url = `/api/v1/websites/${query.id}`;
     const details = new Fetch(`${url}/details`);
     const posts = new Fetch(`${url}/posts`);
@@ -39,6 +39,7 @@ export async function getServerSideProps({ query }) {
             }
         };
     } catch {
+        res.statusCode = 404;
         return {
             props: {}
         };

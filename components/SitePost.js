@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import Utils from 'classes/Utils';
-import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
+import Modal from 'components/Modal';
 
 SitePost.propTypes = {
     post: PropTypes.object.isRequired
