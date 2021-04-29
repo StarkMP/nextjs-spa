@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 Button.propTypes = {
-    children: PropTypes.node,
     className: PropTypes.string,
     id: PropTypes.string,
     type: PropTypes.string,

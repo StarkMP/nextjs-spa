@@ -11,7 +11,6 @@ import SiteSection from 'components/SiteSection';
 import Values from 'classes/Values';
 
 SiteLayout.propTypes = {
-    children: PropTypes.node,
     posts: PropTypes.array,
     details: PropTypes.object
 };

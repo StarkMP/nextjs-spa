@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 SiteSection.propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.node,
     className: PropTypes.string,
     id: PropTypes.string
 };

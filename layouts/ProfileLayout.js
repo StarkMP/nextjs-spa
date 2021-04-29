@@ -1,10 +1,5 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
-
-PersonalLayout.propTypes = {
-    children: PropTypes.node
-};
 
 export default function PersonalLayout({
     children = null

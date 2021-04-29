@@ -6,7 +6,6 @@ Carousel.propTypes = {
     id: PropTypes.string,
     className: PropTypes.string,
     settings: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
 };
 
 export default function Carousel({

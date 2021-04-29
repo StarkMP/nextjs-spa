@@ -6,7 +6,6 @@ import Portal from 'components/Portal';
 
 Modal.propTypes = {
     open: PropTypes.bool.isRequired,
-    children: PropTypes.node,
     hideCloseButton: PropTypes.bool,
     className: PropTypes.string,
     dialogClassName: PropTypes.string,
