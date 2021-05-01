@@ -21,7 +21,22 @@ export default function RegisterForm() {
         setAuthForm(true);
     };
 
-    const handleRequest = async () => {
+    const handleRequest = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const form = e.currentTarget;
+
+        form.classList.add('was-validated');
+
+        if (!form.checkValidity()) {
+            return;
+        }
+
+        if (loading) {
+            return;
+        }
+
         const fetch = UserAccess.register({
             email: email.value,
             password: password.value
@@ -41,26 +56,26 @@ export default function RegisterForm() {
     };
 
     return (
-        <form className='needs-validation'>
+        <form onSubmit={handleRequest} className='needs-validation' noValidate>
             <h4 className='mb-4'>{localize('Sign up')}</h4>
             <div className='mb-3'>
                 <label htmlFor='email' className='form-label'>{localize('Email')}</label>
-                <input onChange={email.onChange} type='email' className='form-control' id='email' placeholder='name@example.com' value={email.value}/>
+                <input onChange={email.onChange} type='email' className='form-control' id='email' value={email.value} required/>
             </div>
             <div className='mb-4'>
                 <label htmlFor='password' className='form-label'>{localize('Password')}</label>
-                <input onChange={password.onChange} type='password' className='form-control' id='password' value={password.value}/>
+                <input onChange={password.onChange} type='password' className='form-control' id='password' value={password.value} required/>
             </div>
             <div className='d-flex align-items-center'>
                 <Button
-                    onClick={handleRequest}
+                    type='submit'
                     className='btn-success'
                     loader={loading}
                 >
                     {localize('Sign up')}
                 </Button>
 
-                <p onClick={() => toggleForm(true)} className='mb-0 link-primary'>Есть аккаунт? Войти</p>
+                <p onClick={() => toggleForm(true)} className='mb-0 link-primary'>{localize('Have account? Sign in')}</p>
             </div>
         </form>
     );

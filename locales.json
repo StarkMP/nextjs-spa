@@ -15,6 +15,14 @@
         "ru": "Регистрация",
         "en": "Sign up"
     },
+    "Don't have account? Sign up": {
+        "ru": "Нет аккаунта? Регистрация",
+        "en": "Don't have account? Sign up"
+    },
+    "Have account? Sign in": {
+        "ru": "Есть аккаунт? Вход",
+        "en": "Have account? Sign in"
+    },
     "Websites example": {
         "ru": "Примеры сайтов",
         "en": "Websites example"
