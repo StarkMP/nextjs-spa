@@ -9,18 +9,18 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    color: $green-500;
+    color: $success;
     @extend %absolute-center;
 
     svg {
-        fill: $green-500;
+        fill: $success;
     }
 
     &_error {
-        color: $red-500;
+        color: $danger;
 
         svg {
-            fill: $red-500;
+            fill: $danger;
         }
     }
 }

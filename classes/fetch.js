@@ -9,15 +9,17 @@ export default class Fetch {
             fetch(this.url, this.params)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error(response.status);
-                    }
-
-                    if (toJSON) {
                         response.json().then(json => {
-                            resolve({ response, json });
+                            throw { ...json, status: response.status };
                         });
                     } else {
-                        resolve({ response });
+                        if (toJSON) {
+                            response.json().then(json => {
+                                resolve({ response, json });
+                            });
+                        } else {
+                            resolve({ response });
+                        }
                     }
                 })
                 .catch(error => {

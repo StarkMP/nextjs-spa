@@ -96,7 +96,7 @@ export async function getServerSideProps({ query, res }) {
             }
         };
     } catch(err) {
-        if (err.message === '422') {
+        if (err.status === 422) {
             return {
                 props: {
                     email,
