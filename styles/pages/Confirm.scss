@@ -1,0 +1,26 @@
+@import '../layouts';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
+.email-confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    color: $green-500;
+    @extend %absolute-center;
+
+    svg {
+        fill: $green-500;
+    }
+
+    &_error {
+        color: $red-500;
+
+        svg {
+            fill: $red-500;
+        }
+    }
+}

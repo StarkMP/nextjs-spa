@@ -25,15 +25,15 @@ export default function LoginForm() {
         e.preventDefault();
         e.stopPropagation();
 
+        if (loading) {
+            return;
+        }
+
         const form = e.currentTarget;
 
         form.classList.add('was-validated');
 
         if (!form.checkValidity()) {
-            return;
-        }
-
-        if (loading) {
             return;
         }
 

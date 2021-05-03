@@ -1,6 +1,6 @@
-@import '../node_modules/bootstrap/scss/functions';
-@import '../node_modules/bootstrap/scss/variables';
-@import '../node_modules/bootstrap/scss/mixins';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
 
 #__next {
     display: flex;
@@ -27,3 +27,4 @@
 
 // pages
 @import './pages/404.scss';
+@import './pages/Confirm.scss';
