@@ -23,4 +23,12 @@ export default class Utils {
 
         return formatter.format(n);
     }
+
+    static formatCookie(cookie) {
+        if (!cookie) {
+            return {};
+        }
+
+        return Object.fromEntries(cookie.split('; ').map(x => x.split(/=(.*)$/,2).map(decodeURIComponent)));
+    }
 }
