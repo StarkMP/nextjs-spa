@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import PersonalLayout from 'layouts/PersonalLayout';
-import Utils from 'classes/Utils';
+import authMiddleware from 'middleware/auth';
 
 function Personal() { // todo
     return (
@@ -11,17 +11,8 @@ function Personal() { // todo
     );
 }
 
-export async function getServerSideProps({ req }) {
-    const cookie = Utils.formatCookie(req.headers.cookie);
-
-    if (!cookie.access_token) {
-        return {
-            redirect: {
-                destination: '/404',
-                permanent: false,
-            }
-        };
-    }
+export async function getServerSideProps({ req, res }) {
+    await authMiddleware({ req, res, location: '/' });
 
     return { props: {} };
 }

@@ -41,7 +41,7 @@ export async function getServerSideProps({ query }) {
     } catch {
         return {
             redirect: {
-                destination: '/404',
+                destination: '/',
                 permanent: false,
             }
         };

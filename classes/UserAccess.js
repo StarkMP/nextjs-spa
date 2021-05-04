@@ -35,7 +35,10 @@ export default class UserAccess {
     }
 
     static set(data) {
-        Cookie.set('access_token', data.access_token, { expires: data.expires_in });
+        const expires = new Date();
+        expires.setSeconds(expires.getSeconds() + data.expires_in);
+
+        Cookie.set('access_token', data.access_token, { expires });
         Cookie.set('refresh_token', data.refresh_token);
     }
 
