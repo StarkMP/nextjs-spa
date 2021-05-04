@@ -8,11 +8,7 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             fetch(this.url, this.params)
                 .then(response => {
-                    if (!response.ok) {
-                        response.json().then(json => {
-                            throw { ...json, status: response.status };
-                        });
-                    } else {
+                    if (response.ok) {
                         if (toJSON) {
                             response.json().then(json => {
                                 resolve({ response, json });
@@ -20,10 +16,11 @@ export default class Fetch {
                         } else {
                             resolve({ response });
                         }
+                    } else {
+                        response.json().then(json => {
+                            reject({ ...json, status: response.status });
+                        });
                     }
-                })
-                .catch(error => {
-                    reject(error);
                 });
         });
     }

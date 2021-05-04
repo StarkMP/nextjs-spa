@@ -3,7 +3,6 @@ import { Fragment, useEffect, useState, useMemo } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
 
 import Carousel from 'components/Carousel';
 import SitePost from 'components/SitePost';
@@ -39,12 +38,10 @@ export default function SiteLayout(props) {
     };
 
     useEffect(() => {
-        const $document = $(document);
-
-        $document.on('scroll', onScroll);
+        document.addEventListener('scroll', onScroll);
 
         return () => {
-            $document.off('scroll', onScroll);
+            document.removeEventListener('scroll', onScroll);
         };
     }, []);
 

@@ -1,3 +1,5 @@
+import Router from 'next/router';
+
 import Fetch from 'classes/Fetch';
 
 export default class UserAccess {
@@ -10,17 +12,15 @@ export default class UserAccess {
         });
     }
 
-    static register(data) {
+    static register(formData) {
         return new Fetch('/api/v1/registrations', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: formData
         });
     }
 
     static logout() {
+        Router.push('/');
         UserAccess.clear();
     }
 
@@ -33,6 +33,6 @@ export default class UserAccess {
     }
 
     static clear() {
-        localStorage.setItem(UserAccess.storageKey, JSON.stringify({}));
+        localStorage.removeItem(UserAccess.storageKey);
     }
 }

@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
 import { useHomeContext } from 'context/home';
+import Button from 'components/Button';
 
 export default function Home() {
     const { localize } = useLocalizer();
@@ -19,8 +20,8 @@ export default function Home() {
     return (
         <Fragment>
             <header>
-                <button onClick={() => openAuthModal(true)}>{localize('Sign in')}</button>
-                <button onClick={() => openAuthModal(false)}>{localize('Sign up')}</button>
+                <Button className='btn-success' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
+                <Button className='btn-primary' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
             </header>
             
             <main>

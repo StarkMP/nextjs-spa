@@ -4,20 +4,14 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import Fetch from 'classes/Fetch';
-import NotFound from 'pages/404';
 import Button from 'components/Button';
 
 Confirm.propTypes = {
     email: PropTypes.string,
-    confirmed: PropTypes.bool.isRequired,
     resend: PropTypes.bool.isRequired
 };
 
-function Confirm({ email, confirmed, resend }) {
-    if (!email) {
-        return <NotFound/>;
-    }
-
+function Confirm({ email, resend }) {
     if (resend) {
         const resend = () => {};
 
@@ -33,10 +27,6 @@ function Confirm({ email, confirmed, resend }) {
         );
     }
 
-    if (!confirmed) {
-        return <NotFound/>;
-    }
-
     return (
         <div className='email-confirm'>
             <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' className='mb-5 bi bi-check2-circle' viewBox='0 0 16 16'>
@@ -49,32 +39,29 @@ function Confirm({ email, confirmed, resend }) {
     );
 }
 
-export async function getServerSideProps({ query, res }) {
+export async function getServerSideProps({ query }) {
     const confirmationCode = query.confirmationCode;
-    const empty = {
-        props: {
-            confirmed: false,
-            resend: false
+    const redirect = {
+        redirect: {
+            destination: '/404',
+            permanent: false,
         }
     };
 
     if (!confirmationCode) {
-        res.statusCode = 404;
-        return empty;
+        return redirect;
     }
 
     const decoded = jwt.decode(confirmationCode);
 
     if (!decoded) {
-        res.statusCode = 404;
-        return empty;
+        return redirect;
     }
 
     const email = decoded.email;
 
     if (!email) {
-        res.statusCode = 404;
-        return empty;
+        return redirect;
     }
 
     const fetch = new Fetch('/api/v1/registrations/confirm', {
@@ -106,8 +93,7 @@ export async function getServerSideProps({ query, res }) {
             };
         }
 
-        res.statusCode = 404;
-        return empty;
+        return redirect;
     }
 }
 

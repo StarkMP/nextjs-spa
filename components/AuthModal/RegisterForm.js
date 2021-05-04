@@ -39,10 +39,7 @@ export default function RegisterForm() {
             return;
         }
 
-        const fetch = UserAccess.register({
-            email: email.value,
-            password: password.value
-        });
+        const fetch = UserAccess.register(new FormData(form));
 
         setLoading(true);
 
@@ -62,7 +59,7 @@ export default function RegisterForm() {
             return;
         }
 
-
+        // todo
     };
 
     if (confirmation) {
@@ -83,11 +80,11 @@ export default function RegisterForm() {
             <h4 className='mb-4'>{localize('Sign up')}</h4>
             <div className='mb-3'>
                 <label htmlFor='email' className='form-label'>{localize('Email')}</label>
-                <input onChange={email.onChange} type='email' className='form-control' id='email' value={email.value} required/>
+                <input onChange={email.onChange} type='email' className='form-control' name='email' value={email.value} required/>
             </div>
             <div className='mb-4'>
                 <label htmlFor='password' className='form-label'>{localize('Password')}</label>
-                <input onChange={password.onChange} type='password' className='form-control' id='password' value={password.value} required/>
+                <input onChange={password.onChange} type='password' className='form-control' name='password' value={password.value} required/>
             </div>
             <div className='d-flex align-items-center'>
                 <Button
