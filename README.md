@@ -1,4 +1,6 @@
-# Boxis.io - service for creating website from your instagram profile.
+# Boxis.io - service for creating website from your instagram profile. (Frontend)
+
+Backend: https://github.com/ekleziast/Instabrand/tree/develop/Server
 
 ## How to start
 ```
