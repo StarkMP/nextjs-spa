@@ -17,9 +17,13 @@ export default class Fetch {
                             resolve({ response });
                         }
                     } else {
-                        response.json().then(json => {
-                            reject({ ...json, status: response.status });
-                        });
+                        response.json()
+                            .then(json => {
+                                reject({ ...json, status: response.status });
+                            })
+                            .catch(err => {
+                                reject(err);
+                            });
                     }
                 });
         });

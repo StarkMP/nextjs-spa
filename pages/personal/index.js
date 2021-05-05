@@ -2,8 +2,9 @@ import dynamic from 'next/dynamic';
 
 import PersonalLayout from 'layouts/PersonalLayout';
 import authMiddleware from 'middleware/auth';
+import Values from 'classes/Values';
 
-function Personal() { // todo
+function Personal() {
     return (
         <PersonalLayout>
             xz
@@ -14,7 +15,7 @@ function Personal() { // todo
 export async function getServerSideProps({ req, res }) {
     await authMiddleware({ req, res, location: '/' });
 
-    return { props: {} };
+    return Values.emptyProps;
 }
 
 export default dynamic(() => Promise.resolve(Personal), {

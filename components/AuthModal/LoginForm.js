@@ -6,6 +6,7 @@ import useInput from 'hooks/useInput';
 import Button from 'components/Button';
 import UserAccess from 'classes/UserAccess';
 import { useHomeContext } from 'context/home';
+import { useUserContext } from 'context/user';
 
 export default function LoginForm() {
     const { localize } = useLocalizer();
@@ -13,6 +14,7 @@ export default function LoginForm() {
     const password = useInput('');
     const { loading, setLoading } = useButton();
     const { setAuthForm } = useHomeContext();
+    const { login } = useUserContext();
 
     const toggleForm = () => {
         if (loading) {
@@ -46,7 +48,7 @@ export default function LoginForm() {
             const response = await fetch.request(true);
             setLoading(false);
 
-            UserAccess.set(response.json);
+            login(response.json);
             Router.push('/personal');
         } catch (err) {
             setLoading(false);

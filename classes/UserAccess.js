@@ -19,8 +19,8 @@ export default class UserAccess {
     }
 
     static logout() {
-        Router.push('/');
         UserAccess.clear();
+        Router.push('/');
     }
 
     static check() {
@@ -28,6 +28,10 @@ export default class UserAccess {
     }
 
     static get() {
+        if (!UserAccess.check()) {
+            return null;
+        }
+
         return {
             access_token: Cookie.get('access_token'),
             refresh_token: Cookie.get('refresh_token')

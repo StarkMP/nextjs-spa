@@ -2,11 +2,13 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 
 import Button from 'components/Button';
-import UserAccess from 'classes/UserAccess';
+import { useUserContext } from 'context/user';
 
 export default function PersonalLayout({
     children = null
 }) {
+    const { logout } = useUserContext();
+
     return (
         <Fragment>
             <Head>
@@ -15,7 +17,7 @@ export default function PersonalLayout({
 
             <header>
                 <h1>Boxis.io</h1>
-                <Button onClick={() => UserAccess.logout()} className='btn-danger'>Выход</Button>
+                <Button onClick={logout} className='btn-danger'>Выход</Button>
             </header>
 
             <main>

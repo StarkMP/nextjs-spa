@@ -3,6 +3,7 @@ import { Localizer, LocaleProvider } from 'reactjs-localizer';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import { UserProvider } from 'context/user';
 import locales from 'locales.json';
 import 'styles/app.scss';
 
@@ -16,9 +17,11 @@ App.propTypes = {
 
 function App({ Component, pageProps }) {
     return (
-        <LocaleProvider>
-            <Component {...pageProps} />
-        </LocaleProvider>
+        <UserProvider>
+            <LocaleProvider>
+                <Component {...pageProps} />
+            </LocaleProvider>
+        </UserProvider>
     );
 }
 

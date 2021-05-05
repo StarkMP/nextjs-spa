@@ -6,11 +6,13 @@ import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
 import { useHomeContext } from 'context/home';
 import Button from 'components/Button';
+import { useUserContext } from 'context/user';
 
 export default function Home() {
     const { localize } = useLocalizer();
     const authModal = useModal();
     const { setAuthForm } = useHomeContext();
+    const { user } = useUserContext();
 
     const openAuthModal = (type) => {
         setAuthForm(type);
@@ -20,8 +22,16 @@ export default function Home() {
     return (
         <Fragment>
             <header>
-                <Button className='btn-success' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
-                <Button className='btn-primary' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
+                {user ? (
+                    <Link href='/personal'>
+                        <a className='btn btn-warning'>Личный кабинет</a>
+                    </Link>
+                ) : (
+                    <Fragment>
+                        <Button className='btn-success' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
+                        <Button className='btn-primary' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
+                    </Fragment>
+                )}
             </header>
             
             <main>
