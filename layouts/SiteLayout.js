@@ -5,8 +5,8 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import Carousel from 'components/Carousel';
-import SitePost from 'components/SitePost';
-import SiteSection from 'components/SiteSection';
+import Post from 'components/Site/Post';
+import Section from 'components/Site/Section';
 import Values from 'classes/Values';
 
 SiteLayout.propTypes = {
@@ -27,7 +27,7 @@ export default function SiteLayout(props) {
     } = props.details;
 
     const { localize } = useLocalizer();
-    const mappedPosts = useMemo(() => props.posts.map(post => <SitePost key={post.id} post={post}/>), [props.posts]);
+    const mappedPosts = useMemo(() => props.posts.map(post => <Post key={post.id} post={post}/>), [props.posts]);
 
     const onScroll = () => {
         if (pageYOffset > 0) {
@@ -66,9 +66,9 @@ export default function SiteLayout(props) {
         };
 
         return props.posts.length ? (
-            <SiteSection id='posts' title='Товары и услуги'>
+            <Section id='posts' title='Товары и услуги'>
                 <Carousel settings={settings}>{mappedPosts}</Carousel>
-            </SiteSection>
+            </Section>
         ) : null;
     }, [props.posts, mappedPosts]);
 

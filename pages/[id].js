@@ -1,4 +1,3 @@
-import NotFound from 'pages/404';
 import SiteLayout from 'layouts/SiteLayout';
 import Fetch from 'classes/Fetch';
 import PropTypes from 'prop-types';
@@ -9,10 +8,6 @@ Site.propTypes = {
 };
 
 export default function Site({ details, posts }) {
-    if (!details) {
-        return <NotFound/>;
-    }
-
     return (
         <SiteLayout
             details={details}
@@ -41,7 +36,7 @@ export async function getServerSideProps({ query }) {
     } catch {
         return {
             redirect: {
-                destination: '/',
+                destination: '/404',
                 permanent: false,
             }
         };
