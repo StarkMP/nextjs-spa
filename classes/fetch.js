@@ -21,6 +21,9 @@ export default class Fetch {
                             .then(json => reject({ ...json, status: response.status }))
                             .catch(err => reject(err));
                     }
+                })
+                .catch(err => {
+                    reject(err);
                 });
         });
     }

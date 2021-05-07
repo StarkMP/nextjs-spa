@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import PersonalLayout from 'layouts/PersonalLayout';
-import authMiddleware from 'middleware/auth';
+import authMiddleware from 'middlewares/auth';
 import Values from 'classes/Values';
 
 function Personal() {

@@ -1,6 +1,6 @@
 import { HomeProvider } from 'context/home';
 import Home from 'components/Home';
-import authMiddleware from 'middleware/auth';
+import authMiddleware from 'middlewares/auth';
 import Values from 'classes/Values';
 
 export default function Main() {
