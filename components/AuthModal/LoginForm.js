@@ -40,12 +40,10 @@ export default function LoginForm() {
             return;
         }
 
-        const fetch = UserAccess.login(new FormData(form));
-
         setLoading(true);
 
         try {
-            const response = await fetch.request(true);
+            const response = await UserAccess.login(new FormData(form)).request(true);
             setLoading(false);
 
             login(response.json);

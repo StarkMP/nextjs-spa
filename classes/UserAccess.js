@@ -18,6 +18,12 @@ export default class UserAccess {
         });
     }
 
+    static resendConfirmation(email) {
+        return new Fetch(`/api/v1/registrations/${email}/resend`, {
+            method: 'POST'
+        });
+    }
+
     static logout() {
         UserAccess.clear();
         Router.push('/');
@@ -43,7 +49,7 @@ export default class UserAccess {
         expires.setSeconds(expires.getSeconds() + data.expires_in);
 
         Cookie.set('access_token', data.access_token, { expires });
-        Cookie.set('refresh_token', data.refresh_token);
+        Cookie.set('refresh_token', data.refresh_token, { expires: 365 });
     }
 
     static clear() {

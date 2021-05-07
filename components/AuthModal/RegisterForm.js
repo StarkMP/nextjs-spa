@@ -9,10 +9,12 @@ import { useHomeContext } from 'context/home';
 
 export default function RegisterForm() {
     const [confirmation, setConfirmation] = useState(false);
+    const [resended, setResended] = useState(false);
     const { localize } = useLocalizer();
     const email = useInput('');
     const password = useInput('');
     const { loading, setLoading } = useButton();
+    const confirmationButton = useButton();
     const { setAuthForm } = useHomeContext();
 
     const toggleForm = () => {
@@ -39,12 +41,10 @@ export default function RegisterForm() {
             return;
         }
 
-        const fetch = UserAccess.register(new FormData(form));
-
         setLoading(true);
 
         try {
-            await fetch.request();
+            await UserAccess.register(new FormData(form)).request();
 
             setLoading(false);
             setConfirmation(true);
@@ -54,12 +54,22 @@ export default function RegisterForm() {
         }
     };
 
-    const resendConfirmation = () => {
-        if (!confirmation) {
+    const resendConfirmation = async () => {
+        if (!confirmation || confirmationButton.loading) {
             return;
         }
 
-        // todo
+        try {
+            confirmationButton.setLoading(true);
+
+            await UserAccess.resendConfirmation(email.value).request();
+
+            confirmationButton.setLoading(false);
+
+            setResended(true);
+        } catch(err) {
+            console.error(err);
+        }
     };
 
     if (confirmation) {
@@ -70,7 +80,7 @@ export default function RegisterForm() {
                 </svg>
                 <p className='mb-1 fs-5'>Подтвердите почту</p>
                 <p className='mb-3 fs-6'>{email.value}</p>
-                <Button className='btn-link' onClick={resendConfirmation}>Отправить письмо повторно</Button>
+                {resended ? 'Письмо отправлено' : <Button loader={confirmationButton.loading} className='btn-link' onClick={resendConfirmation}>Отправить письмо повторно</Button>}
             </div>
         );
     }

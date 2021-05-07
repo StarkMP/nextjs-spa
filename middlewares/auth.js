@@ -32,14 +32,14 @@ export default function authMiddleware({ req, res, location }) {
                     const { json } = response;
 
                     res.setHeader('Set-Cookie', [
-                        `refresh_token=${json.refresh_token}`,
-                        `access_token=${json.access_token}; max-age=${json.expires_in}`
+                        `refresh_token=${json.refresh_token}; path=/; max-age=${365 * 86400000}`,
+                        `access_token=${json.access_token}; path=/; max-age=${json.expires_in}`
                     ]);
 
                     resolve(json);
                 })
                 .catch(error => {
-                    res.setHeader('Set-Cookie', 'refresh_token=0; max-age=0;');
+                    res.setHeader('Set-Cookie', 'refresh_token=0; path=/; max-age=0;');
                     redirect({ res, location });
 
                     resolve(error);

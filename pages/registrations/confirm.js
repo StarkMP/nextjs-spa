@@ -2,9 +2,12 @@ import PropTypes from 'prop-types';
 import jwt from 'jsonwebtoken';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import Fetch from 'classes/Fetch';
 import Button from 'components/Button';
+import useButton from 'hooks/useButton';
+import UserAccess from 'classes/UserAccess';
 
 Confirm.propTypes = {
     email: PropTypes.string,
@@ -12,8 +15,22 @@ Confirm.propTypes = {
 };
 
 function Confirm({ email, resend }) {
+    const { loading, setLoading } = useButton();
+    const [resended, setResended] = useState(false);
+
     if (resend) {
-        const resend = () => {};
+        const resend = async () => {
+            try {
+                setLoading(true);
+    
+                await UserAccess.resendConfirmation(email.value).request();
+    
+                setLoading(false);
+                setResended(true);
+            } catch(err) {
+                console.error(err);
+            }
+        };
 
         return (
             <div className='email-confirm email-confirm_error'>
@@ -22,7 +39,7 @@ function Confirm({ email, resend }) {
                     <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/>
                 </svg>
                 <p className='fs-5'>Не удалось подтвердить <b>{email}</b></p>
-                <Button onClick={resend} className='btn-link'>Отправить письмо ещё раз</Button>
+                {resended ? 'Письмо отправлено' : <Button loader={loading} onClick={resend} className='btn-link'>Отправить письмо повторно</Button> }
             </div>
         );
     }

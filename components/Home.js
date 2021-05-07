@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useLocalizer } from 'reactjs-localizer';
 import { Fragment } from 'react';
+import Router from 'next/router';
 
 import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
@@ -19,6 +20,14 @@ export default function Home() {
         authModal.setActive(true);
     };
 
+    const createSite = () => {
+        if (!user) {
+            return;
+        }
+
+        Router.push('/personal/instapages/create');
+    };
+
     return (
         <Fragment>
             <header>
@@ -35,6 +44,10 @@ export default function Home() {
             </header>
             
             <main>
+                <section>
+                    <h2>Введите Instagram</h2>
+                    <Button onClick={createSite} className='btn-danger'>Создать сайт</Button>
+                </section>
                 <section>
                     <h4>{localize('Websites example')}:</h4>
                     <ul>
