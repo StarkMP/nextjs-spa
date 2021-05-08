@@ -3,21 +3,11 @@ import FormData from 'form-data';
 import Utils from 'classes/Utils';
 import UserAccess from 'classes/UserAccess';
 
-const redirect = ({ res, location }) => {
-    if (!location || !res) {
-        return;
-    }
-
-    res.writeHead(302, { Location: location }).end();
-};
-
-export default function authMiddleware({ req, res, location }) {
+export default function authMiddleware({ req, res }) {
     const cookie = Utils.formatCookie(req.headers.cookie);
 
     if (!cookie.access_token && !cookie.refresh_token) {
-        redirect({ res, location });
-
-        return Promise.resolve();
+        return Promise.resolve(false);
     }
 
     if (!cookie.access_token && cookie.refresh_token) {
@@ -36,16 +26,15 @@ export default function authMiddleware({ req, res, location }) {
                         `access_token=${json.access_token}; path=/; max-age=${json.expires_in}`
                     ]);
 
-                    resolve(json);
+                    resolve(true);
                 })
-                .catch(error => {
+                .catch(() => {
                     res.setHeader('Set-Cookie', 'refresh_token=0; path=/; max-age=0;');
-                    redirect({ res, location });
 
-                    resolve(error);
+                    resolve(false);
                 });
         });
     }
 
-    return Promise.resolve();
+    return Promise.resolve(true);
 }

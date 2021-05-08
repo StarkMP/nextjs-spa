@@ -7,13 +7,17 @@ import Values from 'classes/Values';
 function Personal() {
     return (
         <PersonalLayout>
-            xz
+            Some personal content
         </PersonalLayout>
     );
 }
 
 export async function getServerSideProps({ req, res }) {
-    await authMiddleware({ req, res, location: '/' });
+    const auth = await authMiddleware({ req, res });
+
+    if (!auth) {
+        return Values.serverRedirect('/');
+    }
 
     return Values.emptyProps;
 }

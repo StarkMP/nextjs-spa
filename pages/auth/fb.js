@@ -5,7 +5,7 @@ import Values from 'classes/Values';
 import Fetch from 'classes/Fetch';
 import Utils from 'classes/Utils';
 
-export default function FacebookAuth() {
+export default function FacebookConfirm() {
     return (
         <div className='confirm confirm_error'>
             <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' fill='currentColor' className='mb-5 bi bi-x-circle' viewBox='0 0 16 16'>

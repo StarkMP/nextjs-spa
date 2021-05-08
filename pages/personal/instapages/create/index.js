@@ -14,7 +14,11 @@ export default function Create() {
 }
 
 export async function getServerSideProps({ req, res }) {
-    await authMiddleware({ req, res, location: '/' });
+    const auth = await authMiddleware({ req, res });
+
+    if (!auth) {
+        return Values.serverRedirect('/');
+    }
 
     return Values.emptyProps;
 }
