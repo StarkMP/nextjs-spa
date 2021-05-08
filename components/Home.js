@@ -45,11 +45,11 @@ export default function Home() {
             
             <main>
                 <section>
-                    <h2>Введите Instagram</h2>
+                    <h2>Создайте сайт из Instagram</h2>
                     <Button onClick={createSite} className='btn-danger'>Создать сайт</Button>
                 </section>
                 <section>
-                    <h4>{localize('Websites example')}:</h4>
+                    <h2>{localize('Websites example')}:</h2>
                     <ul>
                         <li>
                             <Link href='/[id]' as={'/coffeehouse'}><a>Кофе-хаус</a></Link>

@@ -19,7 +19,7 @@ export default class Fetch {
                     } else {
                         response.json()
                             .then(json => reject({ ...json, status: response.status }))
-                            .catch(err => reject(err));
+                            .catch(() => reject(response));
                     }
                 })
                 .catch(err => {

@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
+
 import SiteLayout from 'layouts/SiteLayout';
 import Fetch from 'classes/Fetch';
-import PropTypes from 'prop-types';
+import Values from 'classes/Values';
 
 Site.propTypes = {
     details: PropTypes.object,
@@ -34,11 +36,6 @@ export async function getServerSideProps({ query }) {
             }
         };
     } catch {
-        return {
-            redirect: {
-                destination: '/404',
-                permanent: false,
-            }
-        };
+        return Values.serverRedirect('/404');
     }
 }

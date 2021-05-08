@@ -8,6 +8,7 @@ import Fetch from 'classes/Fetch';
 import Button from 'components/Button';
 import useButton from 'hooks/useButton';
 import UserAccess from 'classes/UserAccess';
+import Values from 'classes/Values';
 
 Confirm.propTypes = {
     email: PropTypes.string,
@@ -58,12 +59,7 @@ function Confirm({ email, resend }) {
 
 export async function getServerSideProps({ query }) {
     const confirmationCode = query.confirmationCode;
-    const redirect = {
-        redirect: {
-            destination: '/404',
-            permanent: false,
-        }
-    };
+    const redirect = Values.serverRedirect('/404');
 
     if (!confirmationCode) {
         return redirect;
