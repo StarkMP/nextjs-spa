@@ -2,6 +2,11 @@
 
 Backend: https://github.com/ekleziast/Instabrand/tree/develop/Server
 
+## Technologies
+- React
+- NextJS
+- Bootstrap
+
 ## How to start
 ```
 npm install
