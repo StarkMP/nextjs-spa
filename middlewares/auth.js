@@ -22,7 +22,7 @@ export default function authMiddleware({ req, res }) {
                     const { json } = response;
 
                     res.setHeader('Set-Cookie', [
-                        `refresh_token=${json.refresh_token}; path=/; max-age=${365 * 86400000}`,
+                        `refresh_token=${json.refresh_token}; path=/; max-age=${365 * 86400}`,
                         `access_token=${json.access_token}; path=/; max-age=${json.expires_in}`
                     ]);
 
