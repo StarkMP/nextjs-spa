@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { useLocalizer } from 'reactjs-localizer';
 import { Fragment } from 'react';
 import Router from 'next/router';
-
+import { Typography } from '@material-ui/core';
+ 
 import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
 import { useHomeContext } from 'context/home';
@@ -45,11 +46,11 @@ export default function Home() {
             
             <main>
                 <section>
-                    <h2>Создайте сайт из Instagram</h2>
+                    <Typography component='h2' variant='h4'>Создайте сайт из Instagram</Typography>
                     <Button onClick={createSite} className='btn-danger'>Создать сайт</Button>
                 </section>
                 <section>
-                    <h2>{localize('Websites example')}:</h2>
+                    <Typography component='h2' variant='h4'>{localize('Websites example')}:</Typography>
                     <ul>
                         <li>
                             <Link href='/[id]' as={'/coffeehouse'}><a>Кофе-хаус</a></Link>

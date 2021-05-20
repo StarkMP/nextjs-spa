@@ -1,11 +1,11 @@
 # Boxis.io - service for creating website from your instagram profile. (Frontend)
 
-Backend: https://github.com/ekleziast/Instabrand/tree/develop/Server
-
-## Technologies
-- React
+## Stack (Frontend)
+- ReactJS
 - NextJS
 - Bootstrap
+- MaterialUI
+- SCSS
 
 ## How to start
 ```
@@ -18,3 +18,5 @@ npm run dev
 npm run build
 npm run start
 ```
+
+Backend: https://github.com/ekleziast/Instabrand/tree/develop/Server

@@ -30,5 +30,9 @@
     "Made in": {
         "ru": "Сделано в",
         "en": "Made in"
+    },
+    "404 - Page not found": {
+        "ru": "404 - Страница не найдена",
+        "en": "404 - Page not found"
     }
 }

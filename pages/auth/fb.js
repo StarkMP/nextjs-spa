@@ -38,7 +38,7 @@ export async function getServerSideProps({ query, req }) {
     });
 
     try {
-        const json = await fetch.request(true);
+        const { json } = await fetch.request(true);
 
         return Values.serverRedirect(`/personal/instapages/create/constructor?login=${json.login}`);
     } catch(err) {

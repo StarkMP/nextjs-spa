@@ -1,0 +1,58 @@
+.constructor {
+    padding-top: 50px;
+    padding-bottom: 80px;
+
+    &__title {
+        padding-bottom: 20px;
+    }
+
+    &__inner {
+        margin-top: 30px;
+    }
+
+    &__posts {
+        overflow-y: auto;
+        height: 600px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        padding: 5px 0;
+
+        @media (max-width: 450px) {
+            height: 500px;
+        }
+
+        @media (max-width: 350px) {
+            height: 400px;
+        }
+    }
+
+    &__post {
+        position: relative;
+        margin-bottom: 10px;
+        width: 50%;
+        padding: 0 5px;
+
+        @media (max-width: 530px) {
+            width: 100%;
+        }
+
+        &-image {
+            width: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #fff;
+            padding-top: 100%;
+        }
+
+        input[type='checkbox'] {
+            position: absolute;
+            left: 15px;
+            top: 5px;
+        }
+    }
+}

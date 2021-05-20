@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @import 'node_modules/bootstrap/scss/functions';
 @import 'node_modules/bootstrap/scss/variables';
 @import 'node_modules/bootstrap/scss/mixins';
+
+// disable bootstrap :valid styles
+$form-validation-states: (
+  "invalid": (
+    "color": $form-feedback-invalid-color,
+    "icon": $form-feedback-icon-invalid
+  )
+);
+
+// bootstrap
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
 
 #__next {
     display: flex;
@@ -10,10 +23,14 @@
     overflow-x: hidden;
 }
 
-.btn {
+button {
     &:focus {
-        box-shadow: none;
+        box-shadow: none !important;
     }
+}
+
+input[type='checkbox'] {
+    cursor: pointer;
 }
 
 // components
@@ -28,3 +45,4 @@
 // pages
 @import './pages/404.scss';
 @import './pages/Confirm.scss';
+@import './pages/Constructor.scss';

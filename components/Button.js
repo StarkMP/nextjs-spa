@@ -7,6 +7,7 @@ Button.propTypes = {
     type: PropTypes.string,
     loader: PropTypes.bool,
     loaderClassName: PropTypes.string,
+    style: PropTypes.object,
     onClick: PropTypes.func
 };
 
@@ -17,6 +18,7 @@ export default function Button({
     type = 'button',
     loader = false,
     loaderClassName = '',
+    style = {},
     onClick
 }) {
     const [loading, setLoading] = useState(loader);
@@ -24,6 +26,7 @@ export default function Button({
     useEffect(() => setLoading(loader), [loader]);
 
     return <button
+        style={style}
         onClick={onClick}
         type={type}
         id={id}

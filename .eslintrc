@@ -35,6 +35,8 @@
             { "ignore": ["children"] }
         ],
         "no-undef": 1,
+        "no-console": 1,
+        "newline-before-return": 2,
         "indent": [
             "error",
             4,
