@@ -28,6 +28,20 @@
         @media (max-width: 350px) {
             height: 400px;
         }
+
+        &-settings {
+            .col-md-4 {
+                @media (min-width: 768px) {
+                    width: 43%;
+                }
+            }
+
+            .col-md-8 {
+                @media (min-width: 768px) {
+                    width: 57%;
+                }
+            }
+        }
     }
 
     &__post {

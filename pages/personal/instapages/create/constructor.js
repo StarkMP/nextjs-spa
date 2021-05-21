@@ -47,8 +47,8 @@ function Constructor({ account }) {
             }
         });
 
-        // console.log(data);
-        // return;
+        console.log(data);
+        return;
 
         const postInfo = new Fetch(`/api/v1/instapages/constructor/${account.login}`, {
             method: 'POST',
@@ -207,7 +207,7 @@ function Constructor({ account }) {
 
                     <div className='mb-4'>
                         <label className='form-label'>Favicon</label>
-                        <input required accept='.jpg,.jpeg,.png' className='form-control' type='file' name='favicon'/>
+                        <input required accept='.jpg,.jpeg,.png,.ico' className='form-control' type='file' name='favicon'/>
                     </div>
 
                     <Typography component='h2' variant='h5' className='mb-4 mt-5'>Контакты</Typography>
@@ -247,7 +247,7 @@ function Constructor({ account }) {
                     {formattingPosts.length ? (
                         <Fragment>
                             <Typography component='h2' variant='h5' className='mb-4'>Настройка постов</Typography>
-                            <div className='d-flex flex-column'>{formattingPosts}</div>
+                            <div className='d-flex flex-column constructor__posts-settings'>{formattingPosts}</div>
                         </Fragment>
                     ) : null}
 
@@ -266,25 +266,25 @@ export async function getServerSideProps({ query, req }) {
     }
 
     // mock
-    // return {
-    //     props: {
-    //         account: {
-    //             login,
-    //             posts: [
-    //                 { id: '0', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '1', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '2', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '3', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '4', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '5', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '6', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '7', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '8', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-    //                 { id: '9', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' }
-    //             ]
-    //         }
-    //     }
-    // };
+    return {
+        props: {
+            account: {
+                login,
+                posts: [
+                    { id: '0', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '1', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '2', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '3', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '4', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '5', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '6', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '7', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '8', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
+                    { id: '9', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' }
+                ]
+            }
+        }
+    };
 
     const cookie = Utils.formatCookie(req.headers.cookie);
 
