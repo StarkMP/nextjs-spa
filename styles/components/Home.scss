@@ -15,6 +15,14 @@
     pointer-events: none;
 }
 
+%link-styles-none {
+    text-decoration: none;
+
+    &:hover {
+        color: inherit !important;
+    }
+}
+
 .home {
     &-header {
         display: flex;
@@ -34,11 +42,11 @@
             border: 1px solid #000;
             border-radius: 25px;
             color: #000;
-            padding: 0 35px;
-            height: 37px;
+            padding: 5px 35px;
             background-color: transparent;
             font-weight: 600;
             font-size: 17px;
+            @extend %link-styles-none;
 
             &:first-child {
                 margin-right: 15px;
@@ -69,6 +77,7 @@
             font-size: 17px;
             color: #1d1e20;
             margin-right: 50px;
+            @extend %link-styles-none;
         }
 
         &__menu {
@@ -121,8 +130,7 @@
         }
 
         &__button {
-            height: 40px;
-            width: 175px;
+            padding: 15px 100px;
             font-size: 16px;
             font-weight: 700;
             color: #673de6;
@@ -130,6 +138,7 @@
             border: 2px solid #673de6;
             border-radius: 50px;
             transition: 0.3s ease-in-out;
+            @extend %link-styles-none;
         }
 
         &__button:hover {
@@ -183,8 +192,9 @@
     }
 
     &__button {
-        height: 4rem;
+        padding: 15px 0;
         width: 22rem;
+        text-align: center;
         font-size: 22px;
         font-weight: 700;
         color: #fff;
@@ -192,6 +202,11 @@
         border: none;
         border-radius: 50px;
         transition: 0.3s ease-in-out;
+        @extend %link-styles-none;
+
+        &:hover {
+            color: #fff !important;
+        }
     }
 
     &__button:hover {
@@ -491,12 +506,15 @@
             &__buttons-row {
                 width: 20px;
             }
+
+            &__links-row  {
+                display: none;
+            }
         }
 
         &-mobile-header {
             &__button {
-                height: 50px;
-                width: 350px;
+                padding: 15px 100px;
                 font-size: 16px;
             }
         }
@@ -540,8 +558,7 @@
             margin-top: 64px;
 
             &__button {
-                height: 35px;
-                width: 145px;
+                padding: 5px 40px;
             }
         }
     }

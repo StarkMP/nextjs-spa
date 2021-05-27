@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useLocalizer } from 'reactjs-localizer';
 import { Fragment, useEffect, useState } from 'react';
-import Router from 'next/router';
 
 import useModal from 'hooks/useModal';
 import AuthModal from 'components/AuthModal/Modal';
@@ -10,7 +9,7 @@ import Button from 'components/Button';
 import { useUserContext } from 'context/user';
 import Pricing from './Pricing';
 import laptop from './images/laptop.png';
-import laprop_bg from './images/laptop_bg.png'
+import laptop_bg from './images/laptop_bg.png';
 
 export default function Home() {
     const [scrolled, setScrolled] = useState(false);
@@ -24,14 +23,6 @@ export default function Home() {
     const openAuthModal = (type) => {
         setAuthForm(type);
         authModal.setActive(true);
-    };
-
-    const createSite = () => {
-        if (!user) {
-            return;
-        }
-
-        Router.push('/personal/instapages/create');
     };
 
     const onScroll = () => {
@@ -60,34 +51,6 @@ export default function Home() {
 
     return (
         <Fragment>
-            {/* <header>
-                {user ? (
-                    <Link href='/personal'>
-                        <a className='btn btn-warning'>Личный кабинет</a>
-                    </Link>
-                ) : (
-                    <Fragment>
-                        <Button className='btn-success' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
-                        <Button className='btn-primary' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
-                    </Fragment>
-                )}
-            </header>
-            
-            <main>
-                <section>
-                    <h2>Создайте сайт из Instagram</h2>
-                    <Button onClick={createSite} className='btn-danger'>Создать сайт</Button>
-                </section>
-                <section>
-                    <h2>{localize('Websites example')}:</h2>
-                    <ul>
-                        <li>
-                            <Link href='/[id]' as={'/coffeehouse'}><a>Кофе-хаус</a></Link>
-                        </li>
-                    </ul>
-                </section>
-            </main> */}
-
             <header
                 className={`home-header fixed-top ${
                     scrolled || dropMenu ? 'home-header_scrolled' : ''
@@ -96,11 +59,19 @@ export default function Home() {
                 <h1 className='home-header__logo'>boxis</h1>
                 <div className='home-header__right-side'>
                     <div className='home-header__links-row'>
-                        {/* <a className='home-header__link' href="/">Примеры сайтов</a> */}
+                        <a className='home-header__link' href='#'>Примеры сайтов</a>
                     </div>
                     <div className='home-header__buttons-row'>
-                        <button className='home-header__button'>Вход</button>
-                        <button className='home-header__button'>Регистрация</button>
+                        {user ? (
+                            <Link href='/personal'>
+                                <a className='home-header__button'>Личный кабинет</a>
+                            </Link>
+                        ) : (
+                            <Fragment>
+                                <Button className='home-header__button' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
+                                <Button className='home-header__button' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
+                            </Fragment>
+                        )}
                         {dropMenu ? (
                             <i
                                 className='home-header__menu bi bi-x'
@@ -122,12 +93,16 @@ export default function Home() {
                             </li>
                         </ul>
                         <div className='home-mobile-header__buttons-row'>
-                            <button className='home-mobile-header__button'>
-                                Вход
-                            </button>
-                            <button className='home-mobile-header__button'>
-                                Регистрация
-                            </button>
+                            {user ? (
+                                <Link href='/personal'>
+                                    <a className='home-mobile-header__button'>Личный кабинет</a>
+                                </Link>
+                            ) : (
+                                <Fragment>
+                                    <Button className='home-mobile-header__button' onClick={() => openAuthModal(true)}>{localize('Sign in')}</Button>
+                                    <Button className='home-mobile-header__button' onClick={() => openAuthModal(false)}>{localize('Sign up')}</Button>
+                                </Fragment>
+                            )}
                         </div>
                     </div>
                 ) : null}
@@ -147,18 +122,18 @@ export default function Home() {
                                     интернет-магазин даже без навыков
                                     программирования или дизайна.
                                 </p>
-                                <button className='home__button'>
+                                <a className='home__button' href='#price-list'>
                                     Создать сайт
-                                </button>
+                                </a>
                             </div>
                             <div className='home__right-side'>
                                 <img className='home__laptop' src={laptop} alt='laptop' />
-                                <img className='home__laptop-bg' src={laprop_bg} alt='laptop_bg'></img>
+                                <img className='home__laptop-bg' src={laptop_bg} alt='laptop_bg'></img>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section className='container-md home-pricing'>
+                <section id='price-list' className='container-md home-pricing'>
                     <h1 className='home-pricing__title'>
                         Создайте отличный сайт за считанные минуты
                     </h1>

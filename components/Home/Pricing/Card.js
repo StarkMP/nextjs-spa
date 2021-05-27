@@ -1,11 +1,24 @@
 import React, { Fragment, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
+
+import { useUserContext } from 'context/user';
 
 export default function Card({ data }) {
+    const { user } = useUserContext();
+
     const isFree = useMemo(
         () => (data.price <= 0 ? true : false),
         [data.price]
     );
+
+    const createSite = () => {
+        if (!user) {
+            return;
+        }
+
+        Router.push('/personal/instapages/create');
+    };
 
     return (
         <div className='home-pricing__card'>
@@ -38,7 +51,7 @@ export default function Card({ data }) {
                         })}
                     </ul>
                 </div>
-                <button className='home-pricing__card-button'>Выбрать</button>
+                <button onClick={createSite} className='home-pricing__card-button'>Выбрать</button>
             </div>
         </div>
     );
