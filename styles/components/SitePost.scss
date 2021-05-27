@@ -39,9 +39,9 @@ $width-for-fullscreen: 991px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: rgba(0, 0, 0, .6);
+        background: rgba(0, 0, 0, 0.6);
         text-align: center;
-        transition: opacity .3s;
+        transition: opacity 0.3s;
         color: #fff;
         padding: 0 2%;
 
@@ -74,8 +74,8 @@ $width-for-fullscreen: 991px;
     }
 
     &__modal {
-        background: rgba(0, 0, 0, .5);
-        
+        background: rgba(0, 0, 0, 0.5);
+
         .modal-dialog {
             max-width: calc(520px + 388px);
 
@@ -104,7 +104,7 @@ $width-for-fullscreen: 991px;
 
                 svg {
                     color: #fff;
-                    filter: drop-shadow(0 0 1px rgba(0, 0, 0, .7));
+                    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.7));
                 }
             }
         }

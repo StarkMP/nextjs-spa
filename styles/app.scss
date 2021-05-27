@@ -19,7 +19,6 @@ $form-validation-states: (
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: $gray-100;
     overflow-x: hidden;
 }
 
@@ -39,6 +38,7 @@ input[type='checkbox'] {
 @import './components/AuthModal.scss';
 @import './components/Button.scss';
 @import './components/CreditsModal.scss';
+@import './components/Home.scss';
 
 // layouts
 @import './layouts/SiteLayout.scss';
