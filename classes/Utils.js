@@ -1,7 +1,10 @@
+import { Fragment } from 'react';
+
 export default class Utils {
     static uuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            
             return v.toString(16);
         });
     }
@@ -30,5 +33,17 @@ export default class Utils {
         }
 
         return Object.fromEntries(cookie.split('; ').map(x => x.split(/=(.*)$/,2).map(decodeURIComponent)));
+    }
+
+    static formatSpaces(text) {
+        return (
+            <Fragment>
+                {text.split('\n').map((text, index) => (
+                    <Fragment key={index}>
+                        {text}<br/>
+                    </Fragment>
+                ))}
+            </Fragment>
+        );
     }
 }

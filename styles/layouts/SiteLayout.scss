@@ -7,6 +7,12 @@
     height: 56px;
     transition: background 0.2s;
 
+    nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     &__title {
         font-size: 24px;
         font-weight: 400;
@@ -37,6 +43,7 @@
 .site {
     display: flex;
     flex-direction: column;
+    background-color: $gray-100;
 
     .container {
         @media (max-width: 767px) {
@@ -97,6 +104,22 @@
             }
         }
     }
+
+    section#credits {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-decoration: none;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
     .carousel {
         .slick-slide {
             @media (max-width: 768px) {

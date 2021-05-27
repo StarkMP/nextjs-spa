@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 import { Container, Typography } from '@material-ui/core';
 import { Fragment, useMemo, useState } from 'react';
+import Router from 'next/router';
 
 import Values from 'classes/Values';
 import Button from 'components/Button';
 import Fetch from 'classes/Fetch';
 import Utils from 'classes/Utils';
 import { useUserContext } from 'context/user';
+import useButton from 'hooks/useButton';
 
 Constructor.propTypes = {
     account: PropTypes.object.isRequired
@@ -20,10 +22,15 @@ function Constructor({ account }) {
     const [contacts, setContacts] = useState({ vkontakte: '', telegram: '' });
     // const [keywords, setKeywords] = useState('');
 
+    const { loading, setLoading } = useButton();
     const { user } = useUserContext();
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        if (loading) {
+            return;
+        }
 
         const form = e.currentTarget;
 
@@ -47,9 +54,6 @@ function Constructor({ account }) {
             }
         });
 
-        console.log(data);
-        return;
-
         const postInfo = new Fetch(`/api/v1/instapages/constructor/${account.login}`, {
             method: 'POST',
             headers: {
@@ -71,13 +75,19 @@ function Constructor({ account }) {
             body: imagesFormData
         });
 
+        setLoading(true);
+
         try {
             await Promise.all([
                 postInfo.request(),
                 postImages.request()
             ]);
+
+            setLoading(false);
+            Router.push(`/${account.login}`);
         } catch (err) {
             console.error(err);
+            setLoading(false);
         }
     };
 
@@ -251,7 +261,7 @@ function Constructor({ account }) {
                         </Fragment>
                     ) : null}
 
-                    <Button type='submit' className='btn-success mt-3'>Создать</Button>
+                    <Button loader={loading} type='submit' className='btn-success mt-3'>Создать</Button>
                 </form>
             </div>
         </Container>
@@ -264,27 +274,6 @@ export async function getServerSideProps({ query, req }) {
     if (!login) {
         return Values.serverRedirect('/');
     }
-
-    // mock
-    return {
-        props: {
-            account: {
-                login,
-                posts: [
-                    { id: '0', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '1', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '2', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '3', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '4', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '5', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '6', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '7', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '8', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' },
-                    { id: '9', mediaUrl: 'https://i.imgur.com/e3EyaeO.jpg', timestamp: '123', description: 'Description' }
-                ]
-            }
-        }
-    };
 
     const cookie = Utils.formatCookie(req.headers.cookie);
 

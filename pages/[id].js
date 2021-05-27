@@ -6,36 +6,26 @@ import Values from 'classes/Values';
 
 Site.propTypes = {
     details: PropTypes.object,
-    posts: PropTypes.array
 };
 
-export default function Site({ details, posts }) {
-    return (
-        <SiteLayout
-            details={details}
-            posts={posts}
-        />
-    );
+export default function Site({ details }) {
+    return <SiteLayout details={details}/>;
 }
 
 export async function getServerSideProps({ query }) {
-    const url = `/api/v1/websites/${query.id}`;
-    const details = new Fetch(`${url}/details`);
-    const posts = new Fetch(`${url}/posts`);
+    const fetch = new Fetch(`/api/v1/instapages/${query.id}`);
 
     try {
-        const res = await Promise.all([
-            details.request(true),
-            posts.request(true)
-        ]);
+        const { json } = await fetch.request(true);
 
         return {
             props: {
-                details: res[0].json,
-                posts: res[1].json
+                details: json,
             }
         };
-    } catch {
+    } catch(err) {
+        console.error(err);
+
         return Values.serverRedirect('/404');
     }
 }
