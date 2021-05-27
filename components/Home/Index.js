@@ -59,7 +59,7 @@ export default function Home() {
                 <h1 className='home-header__logo'>boxis</h1>
                 <div className='home-header__right-side'>
                     <div className='home-header__links-row'>
-                        <a className='home-header__link' href='#'>Примеры сайтов</a>
+
                     </div>
                     <div className='home-header__buttons-row'>
                         {user ? (
@@ -88,9 +88,7 @@ export default function Home() {
                 {dropMenu ? (
                     <div className='home-mobile-header'>
                         <ul className='home-mobile-header__row'>
-                            <li className='home-mobile-header__link'>
-                                <a href='/'>Примеры сайтов</a>
-                            </li>
+                            
                         </ul>
                         <div className='home-mobile-header__buttons-row'>
                             {user ? (
