@@ -10,7 +10,9 @@ function Create() {
     , []);
 
     return (
-        <a className='btn btn-success' href={instagramURL}>Авторизуйтесь через Instagram</a>
+        <div className='absolute-center'>
+            <a className='btn btn-success' href={instagramURL}>Авторизуйтесь через Instagram</a>
+        </div>
     );
 }
 
