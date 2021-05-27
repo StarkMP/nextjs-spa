@@ -13,14 +13,18 @@
 
     &__block {
         height: 110px;
-        width: calc(33.333% - 10px) !important;
+        width: calc(33.333% - 10px);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         border-radius: 5px;
         padding: 15px 0 10px 0;
-        margin: 0 5px;
+        margin: 0 5px 10px 5px;
+
+        @media (max-width: 500px) {
+            width: calc(50% - 10px);
+        }
 
         &-instagram {
             background-color: #a53a8e;
