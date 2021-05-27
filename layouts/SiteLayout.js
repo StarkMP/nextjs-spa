@@ -99,7 +99,7 @@ export default function SiteLayout({ details }) {
             { title: 'Контакты', id: 'credits' }
         ];
 
-        return defaultSections.concat([customSections]).map((item, index) => {
+        return defaultSections.concat(customSections).map((item, index) => {
             return (
                 <li key={index} className='nav-item'>
                     <a href={`#${item.id}`} className={`nav-link ${scrolled ? 'text-dark' : 'text-light'}`}>{item.title}</a>
