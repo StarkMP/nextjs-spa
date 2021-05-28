@@ -47,7 +47,7 @@ export default function LoginForm() {
             setLoading(false);
 
             login(response.json);
-            Router.push('/personal');
+            Router.reload();
         } catch (err) {
             setLoading(false);
             console.error(err);

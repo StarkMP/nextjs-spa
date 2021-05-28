@@ -116,6 +116,7 @@ $width-for-fullscreen: 991px;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        background-color: #fffafa;
 
         @media (max-width: $width-for-fullscreen) {
             width: 100vw;

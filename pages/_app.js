@@ -5,6 +5,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { UserProvider } from 'context/user';
 import locales from 'locales.json';
 import 'styles/app.scss';
+import { Fragment } from 'react';
+import Head from 'next/head';
 
 Localizer.defaultLanguage = 'ru';
 Localizer.mount(locales);
@@ -16,11 +18,16 @@ App.propTypes = {
 
 function App({ Component, pageProps }) {
     return (
-        <UserProvider>
-            <LocaleProvider>
-                <Component {...pageProps} />
-            </LocaleProvider>
-        </UserProvider>
+        <Fragment>
+            <Head>
+                <title>Boxis.io</title>
+            </Head>
+            <UserProvider>
+                <LocaleProvider>
+                    <Component {...pageProps} />
+                </LocaleProvider>
+            </UserProvider>
+        </Fragment>
     );
 }
 

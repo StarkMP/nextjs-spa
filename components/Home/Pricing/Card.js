@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 
 import { useUserContext } from 'context/user';
+import { useHomeContext } from 'context/home';
 
 export default function Card({ data }) {
     const { user } = useUserContext();
+    const { authModal } = useHomeContext();
 
     const isFree = useMemo(
         () => (data.price <= 0 ? true : false),
@@ -14,6 +16,8 @@ export default function Card({ data }) {
 
     const createSite = () => {
         if (!user) {
+            authModal.setActive(true);
+            
             return;
         }
 
