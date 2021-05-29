@@ -10,7 +10,8 @@ import Section from 'components/Site/Section';
 import Values from 'classes/Values';
 import Utils from 'classes/Utils';
 import useModal from 'hooks/useModal';
-import CreditsModal from 'components/Site/CreditsModal';
+import ContactsModal from 'components/Site/ContactsModal';
+import ContactsSection from 'components/Site/ContactsSection';
 
 SiteLayout.propTypes = {
     posts: PropTypes.array,
@@ -33,7 +34,7 @@ export default function SiteLayout({ details }) {
     const { active, setActive, onClose  } = useModal();
 
     const mappedPosts = useMemo(() => instaposts.map(post => {
-        return <Post key={post.id} openCredits={() => setActive(true)} login={instagramLogin} post={post}/>;
+        return <Post key={post.id} openContacts={() => setActive(true)} login={instagramLogin} post={post}/>;
     }), [instagramLogin, instaposts, setActive]);
 
     const onScroll = () => {
@@ -79,14 +80,8 @@ export default function SiteLayout({ details }) {
         ) : null;
     }, [mappedPosts]);
 
-    const creditsSection = useMemo(() => {
-        return (
-            <Section id='credits' title='Контакты'>
-                <a href={`https://instagram.com/${instagramLogin}`}>Instagram</a>
-                {vkontakte ? <a href={`https://vk.me/${vkontakte}`}>ВКонтакте</a> : null }
-                {telegram ? <a href={`https://t.me/${telegram}`}>Telegram</a> : null}
-            </Section>
-        );
+    const contactsSection = useMemo(() => {
+        return <ContactsSection contacts={{ instagram: instagramLogin, vkontakte, telegram }}/>;
     }, [instagramLogin, vkontakte, telegram]);
 
     // todo
@@ -96,7 +91,7 @@ export default function SiteLayout({ details }) {
         const defaultSections = [
             { title: 'Главная', id: 'home' },
             { title: 'Товары и услуги', id: 'posts' },
-            { title: 'Контакты', id: 'credits' }
+            { title: 'Контакты', id: 'contacts' }
         ];
 
         return defaultSections.concat(customSections).map((item, index) => {
@@ -136,7 +131,7 @@ export default function SiteLayout({ details }) {
                 <div className='container'>
                     {postsSection}
                     {customSections}
-                    {creditsSection}
+                    {contactsSection}
                 </div>
             </main>
 
@@ -146,7 +141,7 @@ export default function SiteLayout({ details }) {
                 </div>
             </footer>
 
-            <CreditsModal credits={{ instagram: instagramLogin, vkontakte, telegram }} open={active} onClose={onClose}/>
+            <ContactsModal contacts={{ instagram: instagramLogin, vkontakte, telegram }} open={active} onClose={onClose}/>
         </Fragment>
     );
 }

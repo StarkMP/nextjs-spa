@@ -8,10 +8,10 @@ import Modal from 'components/Modal';
 SitePost.propTypes = {
     post: PropTypes.object.isRequired,
     login: PropTypes.string.isRequired,
-    openCredits: PropTypes.func.isRequired
+    openContacts: PropTypes.func.isRequired
 };
 
-export default function SitePost({ post, login, openCredits }) {
+export default function SitePost({ post, login, openContacts }) {
     const formattedPrice = useMemo(() => Utils.formatMoney(post.price), [post.price]);
     const modal = useModal();
     
@@ -20,7 +20,7 @@ export default function SitePost({ post, login, openCredits }) {
     const postImage = `https://boxis.io/api/v1/instapages/${login}/images?id=${post.id}`;
 
     // temp (todo)
-    const call = () => setTimeout(openCredits, 300);
+    const call = () => setTimeout(openContacts, 300);
 
     return (
         <div className='site-post' onClick={openModal}>

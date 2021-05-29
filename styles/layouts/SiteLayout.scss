@@ -101,15 +101,15 @@
             font-weight: normal;
             font-size: 34px;
             margin-bottom: 40px;
+            text-align: center;
 
             @media (max-width: 768px) {
                 font-size: 28px;
-                text-align: center;
             }
         }
     }
 
-    section#credits {
+    section#contacts {
         display: flex;
         flex-direction: column;
 
