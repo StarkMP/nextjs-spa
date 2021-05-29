@@ -110,16 +110,15 @@
     }
 
     section#contacts {
-        display: flex;
-        flex-direction: column;
+        svg {
+            @media (max-width: 800px) {
+                height: 70px;
+                width: 70px;
+            }
 
-        a {
-            font-size: 20px;
-            margin-bottom: 10px;
-            text-decoration: none;
-
-            &:last-child {
-                margin-bottom: 0;
+            @media (max-width: 350px) {
+                height: 45px;
+                width: 45px;
             }
         }
     }
